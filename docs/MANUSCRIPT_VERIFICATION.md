@@ -1,6 +1,8 @@
 # Manuscript Methods vs. code verification
 
-This document cross-references the manuscript's Methods text (as supplied to the assistant on 2026-07-18) against the actual code in this repository, section by section. Each item is marked:
+This document cross-references the manuscript's Methods text against the actual code in this repository, section by section. Each item is marked:
+
+**Update 2026-07-19:** the full manuscript document (`02_Manuscript.docx`, title "Deep learning-derived spatial phenotypes and proteome-wide causal inference identify therapeutic targets for cardiac fibrosis") was supplied directly and re-checked against the current code. This pass resolved the cis-pQTL window question below, but also surfaced a serious new contradiction in the CVAE learning-rate schedule finding — see the top of the Summary section.
 
 - ✅ **MATCH** — parameter/step found in code, values agree
 - ⚠️ **MISMATCH** — step exists in code, but a specific parameter disagrees with the manuscript text
@@ -17,16 +19,17 @@ File:line references are given wherever possible so each item can be checked dir
 |---|---|---|
 | 4 downsampling blocks, 16→256 filters | ✅ | `get_unet(n_filters=16, ...)` uses `n_filters * {1,2,4,8,16}` = 16/32/64/128/256 in both `shriya_unet_myocardium.py` and `deploy_unet_segmentation.py` |
 | 3×3 convolutions, batch norm, dropout | ✅ | `conv2d_block(..., kernel_size=3, batchnorm=True)`, `Dropout(dropout)` at every stage |
-| **Dropout 0.1** | ⚠️ | `get_unet()`'s default is `dropout=0.1`, but **both actual call sites override it to `dropout=0.05`**: `shriya_unet_myocardium.py:230` and `deploy_unet_segmentation.py:138` (`get_unet(input_img, n_filters=16, dropout=0.05, batchnorm=True)`). Same in the notebook copy (`01_imaging/shriya_unet_myocardium.ipynb:393`). Effective dropout used is 0.05, not 0.1. |
-| Adam optimizer, binary cross-entropy loss | ✅ | `model.compile(optimizer=Adam(), loss="binary_crossentropy", ...)` |
+| Dropout 0.05 | ✅ | `get_unet()`'s default is `dropout=0.1`, but **both actual call sites override it to `dropout=0.05`**: `shriya_unet_myocardium.py:230` and `deploy_unet_segmentation.py:138` (`get_unet(input_img, n_filters=16, dropout=0.05, batchnorm=True)`). Matches the manuscript's stated "dropout (0.05)" exactly. |
+| Adam optimizer (default LR), binary cross-entropy loss, accuracy metric | ✅ | `model.compile(optimizer=Adam(), loss="binary_crossentropy", metrics=["accuracy"])` |
 | Up to 100 epochs | ✅ | `epochs = 100` |
-| **Batch size 16** | ⚠️ | `shriya_unet_myocardium.py:43` and the notebook both set `batch_size = 8`, not 16. |
+| Batch size 8 | ✅ | `shriya_unet_myocardium.py:43`: `batch_size = 8`, matching the manuscript exactly. |
 | Early stopping patience 10 | ✅ | `EarlyStopping(patience=10, ...)` |
 | LR reduction factor 0.1 after 5 epochs, min LR 0.00001 | ✅ | `ReduceLROnPlateau(factor=0.1, patience=5, min_lr=0.00001, ...)` |
-| **Threshold 0.9 on probability outputs** | ✅ (notebook only) | Not hardcoded in `deploy_unet_segmentation.py` (it's a required CLI arg, whose docstring example shows `0.08`, not 0.9). Confirmed as actually used via `01_imaging/shriya_unet_myocardium.ipynb` (`predict(image, 0.9)` at 3 call sites). |
+| Threshold 0.9 on probability outputs | ✅ **Confirmed by repo owner** | Used in `01_imaging/shriya_unet_myocardium.ipynb` (`predict(image, 0.9)` at 3 call sites), matching the manuscript's narrative about a "steep dropoff... observed at 0.9". `deploy_unet_segmentation.py`'s `-t/--threshold` is a required CLI argument (no hardcoded default, and its docstring example of `0.08` is just an example, not what was actually run) — the repo owner has confirmed 0.9 is the correct value that was used for the population-scale deployment run. |
 | OpenCV contour detection, largest connected region | ✅ | `postprocess_prediction()` in `deploy_unet_segmentation.py` uses `cv2.findContours` + `max(contours, key=cv2.contourArea)` |
 | QC via two concentric ring-shaped contours | ✅ | `unet_quality_control.py`'s `check_donut()`: counts closed contours via `cv2.RETR_CCOMP`, checks `circle_count == 2` |
-| 50,239 input images / 42,667 QC-passed (84.9%) | — | Data-scale facts, not verifiable from code without running it against real data |
+| n=728 manually-traced masks split 70% train / 20% test / 10% validation | ⚠️ minor | `shriya_unet_myocardium.py:65-66` does `train_test_split(..., test_size=0.2)` then `train_test_split(train, ..., test_size=0.1)` on the remainder — this actually yields ~72% train / ~20% test / ~8% validation (0.8×0.9 / 0.2 / 0.8×0.1), not exactly 70/20/10. Close enough to likely be a rounding description, but worth a quick check against the real mask count (728 × 0.1 = 72.8 vs. 728 × 0.08 ≈ 58 validation masks — a real difference in absolute N if precision matters). |
+| 50,239 input images / 42,083 QC-passed (83.7%) | — | Data-scale facts, not verifiable from code without running it against real data |
 | Dice=0.84, r²=0.914 vs. manual annotation | — | Result values; would be produced by `septal-myocardial-quality-comparison.ipynb` or the evaluation cells of `shriya_unet_myocardium.ipynb`, not independently checkable from source |
 
 **U-Net architecture bug (carried forward from `REVIEW_REQUIRED.md` item 3):** `conv2d_block()`'s second convolution is applied to `input_tensor` again instead of to the first convolution's output `x` — i.e. the block is not actually two stacked convolutions. This affects both `shriya_unet_myocardium.py` and `deploy_unet_segmentation.py` identically (and the already-fixed `fine_tune_sam_myocardium_autobounding_box.py`), so training and deployment are at least internally consistent with each other — but the manuscript describes what reads as a standard two-conv block. 🐛 Not fixed here (see prior note: fixing it would invalidate already-trained weights without a retrain).
@@ -41,7 +44,7 @@ File:line references are given wherever possible so each item can be checked dir
 | Decoder filters 256/128/64/1, stride 2, sigmoid | ✅ | `CVAE.decoder` + `decode(..., apply_sigmoid=True)` |
 | 16 latent dimensions | ✅ | Default/typical `-ld 16` across deploy scripts and weight filenames |
 | Loss = reconstruction + KL divergence, Adam | ✅ | `compute_loss()` combines `logpx_z` (reconstruction) and `logpz - logqz_x` (KL) |
-| **Exponential LR schedule, initial 1e-3, decay factor 0.9 every 10,000 steps** | ✅ **Resolved** | **`train_VAE_optimized.py` is confirmed as the canonical training script** (its `ExponentialDecay(initial_learning_rate=1e-3, decay_steps=10000, decay_rate=0.9, staircase=True)` matches the manuscript exactly). This repo previously had the canonical/alternate designation backwards — the file with this schedule was named `train_VAE_optimized_v1.py` and treated as "an earlier iteration." **Files have been swapped**: the confirmed-canonical script is now `02_vae/train_VAE_optimized.py`, and the other version (`CosineDecay` schedule, different loss-computation structure) is now `02_vae/train_VAE_optimized_alt.py`. README and `docs/REVIEW_REQUIRED.md` updated accordingly. |
+| Cosine-decay LR schedule (1e-3 start, 250,000 steps), early stopping patience 10 | ✅ **Resolved — canonical designation swapped back** | The manuscript's *"cosine-decay learning-rate schedule starting at 10⁻³ across 250,000 optimizer steps... early stopping after 10 epochs without improvement"* precisely matches `CosineDecay(initial_learning_rate=1e-3, decay_steps=epochs * 1250)` (200 × 1250 = 250,000) plus `patience = 10`. This script was previously (incorrectly) named `train_VAE_optimized_alt.py` and treated as non-canonical, based on an earlier, less precise description of the manuscript's LR schedule. **Per the repo owner, confirmed correct: `train_VAE_optimized.py`/`train_VAE_optimized_alt.py` have been swapped** so the cosine-decay/early-stopping script is now `02_vae/train_VAE_optimized.py` (canonical) and the exponential-decay script (`ExponentialDecay(...decay_steps=10000, decay_rate=0.9)`, no early stopping) is now `02_vae/train_VAE_optimized_alt.py`. `02_vae/README.md` updated to match; `train_VAE.sh` needed no change since it already calls the script by its (now-correct) name, `train_VAE_optimized.py`. |
 | **Train/val/test split 70/20/10** | ⚠️ (closed — text edit) | Both training scripts use `train_val_test_split=[0.7, 0.15, 0.15]` (70/15/15), not 70/20/10. Per the repo owner's general guidance, resolve via manuscript text edit. |
 | MSE=0.0005, PSNR=32.15dB, SSIM=0.92, Dice=0.92 | — | Result values; the metric *implementations* (MSE/PSNR/SSIM/Dice) are present and correctly named in `vae_evaluation.py`, but the specific numbers aren't checkable from source |
 | Grad-CAM-inspired attention: gradients of latent dim wrt final conv feature maps, global average pooling, ReLU, resize to original dims | ✅ | `VAE_Attention_Mapping.ipynb`: `tf.GradientTape()`, `tf.reduce_mean(gradients, axis=(1,2))` (= GAP), `tf.nn.relu(attention_map)`, `cv2.resize(...)`/`tf.image.resize(...)` |
@@ -78,18 +81,17 @@ File:line references are given wherever possible so each item can be checked dir
 | Disease prevalence across quartiles: chi-squared trend test | ✅ | `mortality_curves_chi_squared.ipynb` has a "Disease Grouping" section using `stats.chi2_contingency` (a commented-out Cochran-Armitage trend test is also present, per `REVIEW_REQUIRED.md`) |
 | ICD-10 codes: T1DM E10, T2DM E11, MI I21, HCM I42.1/I42.2, DCM I42.0, valvular I05-I08/I34-I39, amyloidosis E85, sarcoidosis D86, CKD N18, hypertension I10, IHD I20-I25, non-ischaemic I42-I43/I50-I51 w/o IHD | ⚠️ **partial mismatch, see below** | See breakdown below — evaluated only against the live code path. |
 
-### ICD-10 code definitions (`03_phenotypes/SMHOLLI_tranformer_phenotype_associations.ipynb`)
+### ICD-10 code definitions
 
-This notebook contains two back-to-back cells that both define disease-cohort variables from `icd10` string matches. Checked which one is actually live by tracing forward to the `.to_csv(...)` calls that produce this notebook's output files:
-
-- **Cell 32 is the live path.** Its variables (`HCM_patients`, `DCM_patients`, `valvular_patients`, `amyloidosis_patients`, `restrictiveCM_patients`, `ischemic_patients`, `nonischemic_patients`) are each converted to an `_ids` list, which **cell 34** then uses via `.isin(...)` to build the `HCM_status`/`DCM_status`/`valvular_status`/`amyloidosis_status`/`restrictiveCM_status`/`ischemic_disease`/... columns on `unet_myocardium_data`/`unet_septum_data`, which are the dataframes actually written out via `.to_csv(...)` later in the notebook.
-- **Cell 33 is dead code.** It redefines `valvular_patients` again and additionally defines `CAD_patients`, `CAD_graft_patients`, `heart_failure_patients`, `cardiac_arrest_patients`, and `MI_patients` — the last three all using the identical `I509|I089|I359` filter (a copy-paste of the valvular-disease pattern that was never updated with the correct codes for those other conditions). **None of cell 33's five variables are ever converted to an `_ids` list, used in `.isin(...)`, or referenced again anywhere in the notebook** — confirmed by searching the full extracted source for each name. As the user pointed out, this notebook mixes exploratory cells with the live pipeline, and cell 33 is exploratory: it has no path to any output file. Retracted the earlier "bug" framing for this cell; it doesn't affect any result.
-
-Given that correction, here's the comparison against the manuscript using only the **live** cell-32 definitions:
+**Update (2026-07-19):** the original notebook this section evaluated (`03_phenotypes/SMHOLLI_tranformer_phenotype_associations.ipynb`) was split into numbered scripts during a repository restructuring -- see `03_phenotypes/README.md`. The disease-cohort definitions now live in `03_phenotypes/03_disease_status_annotation.py`. That split also resolved a provenance question this document previously flagged as unverifiable: `disease_patient_IDs.txt` (the file `04_pwas/03_PheWAS_delta_rank_test_T1_descriptive_statistics.ipynb` and `08_clinical_associations/02_mortality_curves_chi_squared.ipynb` read as `cardiac_ids_dict` for the HCM, Valvular, Amyloidosis, Ischemic, and Non-Ischemic disease groups) **is generated by code in this repository** (`03_disease_status_annotation.py`), not sourced from an external file as previously believed -- the earlier "5 disease groups unverifiable" finding no longer applies.
 
 ```
 HCM_patients          = icd10 contains 'I421|I422'          # matches manuscript's I42.1, I42.2 ✅
-DCM_patients          = icd10 contains 'I420'                # matches manuscript's I42.0 ✅
+DCM_patients          = icd10 contains 'I420'                # matches manuscript's I42.0 ✅ (this is the definition
+                                                                that ends up in disease_patient_IDs.txt; a *separate*,
+                                                                broader "I42" match is used independently by the two
+                                                                notebooks that read that file for their own DCM group
+                                                                -- see below)
 amyloidosis_patients  = icd10 contains 'E85'                  # matches ✅
 valvular_patients     = icd10 contains 'I509|I089|I359'      # manuscript wants I05-I08, I34-I39 — only 3 specific subcodes present, and I509 (heart failure) isn't a valvular code at all ⚠️
 restrictiveCM_patients = icd10 contains 'I425'                # not in the manuscript's disease list at all
@@ -97,7 +99,24 @@ ischemic_patients     = icd10 contains 'I20|I21|I22|I23|I24'  # manuscript's IHD
 nonischemic_patients  = icd10 contains 'I42|I50|I31|I34|I35'  # manuscript wants I42-I43/I50-I51 w/o IHD; I31/I34/I35 aren't in the manuscript's non-ischaemic set, and I43/I51 are missing ⚠️
 ```
 
-The `valvular_patients` and `nonischemic_patients` code-set mismatches persist even on the corrected, live-only comparison — those are still worth checking against the manuscript's intended codes. No T1DM (E10), T2DM (E11), MI (I21 standalone), CKD (N18), hypertension (I10), or sarcoidosis (D86) status columns were found being built in *this* notebook via the same `_ids`/`.isin()` pattern — those disease definitions may live in a different notebook (e.g. `PheWAS_delta_rank_test_T1_descriptive_statistics.ipynb`, which does reference several of those codes per the earlier grep) rather than being missing outright; not exhaustively traced here.
+Separately, `04_pwas/03_PheWAS_delta_rank_test_T1_descriptive_statistics.ipynb` and `08_clinical_associations/02_mortality_curves_chi_squared.ipynb` build their own T1DM/T2DM/MI/DCM/Sarcoidosis/CKD/Hypertension/Normal groups directly (not via `disease_patient_IDs.txt`):
+
+```
+type1_diabetes_patients = icd10 contains "E10"     # matches manuscript's E10 ✅
+type2_diabetes_patients = icd10 contains "E11"     # matches manuscript's E11 ✅
+MI_patients             = icd10 contains "I21"     # matches manuscript's I21 ✅
+DCM_patients             = icd10 contains "I42"     # manuscript wants I42.0 specifically — this broader "I42" bare
+                                                      substring match also captures I42.1/I42.2 (HCM) and any other
+                                                      I42.x code ⚠️ MISMATCH (note: the precise I420-only version
+                                                      exists in 03_disease_status_annotation.py above, just isn't
+                                                      the one these two notebooks use)
+sarcoidosis_patients    = icd10 contains "D86"     # matches manuscript's D86 ✅
+chronic_kidney_disease  = icd10 contains "N18"     # matches manuscript's N18 ✅
+hypertension_patients   = icd10 contains "I10"     # matches manuscript's I10 ✅
+Normal_patients          = icd10.isna()             # matches "individuals without any ICD-10 codes" ✅
+```
+
+**Per the repo owner, the disease-group definitions are confirmed fine as-is** — the broad `"I42"` DCM match in the two result-producing notebooks doesn't need to be changed to match `03_disease_status_annotation.py`'s precise version. No further action here.
 
 Software versions (Python 3.9.7, NumPy 1.22.4, pandas 2.3.2, SciPy 1.7.1, lifelines 0.30.0) are pinned in `requirements.txt` per the manuscript; not independently checkable from the analysis scripts themselves since they don't declare versions inline.
 
@@ -138,7 +157,7 @@ Software versions (Python 3.9.7, NumPy 1.22.4, pandas 2.3.2, SciPy 1.7.1, lifeli
 | Claim | Status | Evidence |
 |---|---|---|
 | TwoSampleMR 0.6.14, MendelianRandomization 0.10.0 | ✅ | Pinned in `packages.R` per manuscript; package calls present throughout `06_mr/` |
-| **Instruments: cis-pQTLs within 100kb of protein-coding gene** | ⚠️ **MAJOR MISMATCH — flagging as highest priority** | `06_mr/cis_loop_script.R:120`: `cis_flank <- 500000` → a ±500kb window (1Mb total), not ±100kb. This is a **5x** difference from what you just supplied as the manuscript text. Note this directly **contradicts** `docs/REVIEW_REQUIRED.md` item 1, which (carried forward from the mentor's prior review) states: *"resolved in companion manuscript: cis_loop_script.R sets cis_flank to 500000... The revised Methods now states variants were selected within 500 kb."* Either (a) there are two different versions of the Methods text — one saying 100kb (what you just pasted) and a "revised" one saying 500kb (what the mentor's notes describe) and I don't know which is current, or (b) that prior note was itself mistaken. **This needs your direct confirmation** — it changes which SNPs are eligible instruments for every downstream MR/coloc/MR-PRESSO result. |
+| Instruments: cis-pQTLs within ±500kb of protein-coding gene | ✅ **Resolved** | The actual manuscript text reads: *"located within 500 kilobases upstream or downstream of the protein-coding gene (±500 kb)"* — matches `06_mr/cis_loop_script.R:120`'s `cis_flank <- 500000` exactly. (An earlier pass of this document, working from a paraphrased description rather than the source manuscript, had flagged a possible 100kb-vs-500kb conflict — now resolved by reading the actual text directly: it's 500kb.) |
 | LD clumping: r²<0.01, index p<5×10⁻⁵, correlated p<1×10⁻³ | ✅ | `06_mr/clumping_shriya.sh`: `--clump-r2 0.01 --clump-p1 5e-5 --clump-p2 1e-3` (all three match exactly). Note `--clump-kb 100` here is the LD-clumping window, a separate parameter from the cis-pQTL gene window discussed above — the two "100kb"-shaped numbers in this pipeline refer to different things and shouldn't be conflated. |
 | Primary method: IVW fixed effects | ✅ | `mr_ivw(mr_input_obj, model = "fixed")` consistently across `MR_error_handling.R`, `MR_shriya_2.R`, `run_mr_core.R` |
 | Bonferroni correction: 0.05 / number of tests within each analysis type | ✅ (generic) | `06_mr/find_sig.sh` implements a Bonferroni-style threshold; see code-cleanliness note below |
@@ -204,17 +223,27 @@ Per the repo owner: any item below that is purely "manuscript states value X, co
 - Outlier winsorization method (mean±3×SD actual, not 3×IQR).
 - GWAS QC filters (`--geno 0.1`, `--hwe 1e-15` actual) and the absence of an explicit `--covar` flag (covariates are applied via phenotype pre-residualization instead).
 - GWAS/PWAS covariate lists not including BMI / height-weight ratio in the residualization script as currently captured — per your note, this script was hand-edited repeatedly for different purposes, so update the text to whatever covariate set was actually used for each result, not to what this snapshot shows.
-- ICD-10 code specificity for `valvular_patients` (3 subcodes vs. the full I05-I08/I34-I39 ranges) and `nonischemic_patients` (I31/I34/I35 included, I43/I51 missing) in the live cell of `SMHOLLI_tranformer_phenotype_associations.ipynb` — if these narrower codes were the intended definitions, just describe them as such in the text.
+- ICD-10 code specificity for `valvular_patients` (3 subcodes vs. the full I05-I08/I34-I39 ranges) and `nonischemic_patients` (I31/I34/I35 included, I43/I51 missing) in `03_phenotypes/03_disease_status_annotation.py` — if these narrower codes were the intended definitions, just describe them as such in the text.
 - The `T1_percentiles_erroded.py` 99.5th-vs-99.75th percentile question — **moot**, this erosion-depth sensitivity script and its output were never part of the manuscript's reported methods, so there's nothing to reconcile against the text.
 - `06_mr/find_sig.sh`'s dead first `THRESHOLD` assignment — cosmetic, no manuscript claim depends on it.
 
-### Resolved this pass (per repo owner)
+### Resolved this pass (per repo owner, prior to the manuscript document being supplied)
 
-- **Canonical training script confirmed and swapped.** `02_vae/train_VAE_optimized.py` is now the file with the `ExponentialDecay` schedule matching the manuscript (formerly named `train_VAE_optimized_v1.py`); the other version is now `02_vae/train_VAE_optimized_alt.py`. README, `train_VAE.sh`, and this document updated to match.
 - **STRING-db, protein prioritization, and deCODE replication** are all confirmed manual steps or reuses of previously-existing scripts, not gaps. No code changes needed — just document them as manual/external steps in the manuscript methods text. Sections 6, 10, and 11 above updated accordingly.
 - **`run_MR_PRESSO.R` / `combine_MR_PRESSO.R` output-directory naming** — replaced the hardcoded, disputed subdirectory name (`"MRPRESSO_results"` vs `"MRPRESSO_results_2"`) with a shared placeholder (`RESULTS_SUBDIR`, overridable via `$MRPRESSO_RESULTS_SUBDIR`) in both scripts, so neither guess is silently baked in — set it explicitly once you confirm which directory the real results live in.
 - **`MR_job_shriya_2_latent.sh`** — replaced its disputed `--brain_path`/`--out_file` values (which pointed at T1-percentile data despite the `_latent` filename) with a `LATENT_GWAS_DIR="<LATENT_GWAS_DIR>"` placeholder, rather than leaving the likely-wrong concrete path in place.
 
+### Resolved this pass (2026-07-19, after reading the actual manuscript document)
+
+- **Cis-pQTL window.** The manuscript states ±500kb, matching `06_mr/cis_loop_script.R` exactly. The earlier "100kb vs 500kb" conflict was an artifact of working from a paraphrased description rather than the source document — closed, no discrepancy.
+- **U-Net dropout (0.05) and batch size (8).** Both were previously flagged as mismatches against a paraphrased "dropout 0.1 / batch size 16" description. The actual manuscript text states dropout 0.05 and batch size 8, both of which match the code exactly — these were false positives from before the real document was available, not real mismatches. Corrected in section 1 above.
+
+### Resolved this pass (2026-07-19, per repo owner's direct confirmation)
+
+- **CVAE learning-rate schedule / canonical script.** Confirmed: swap the canonical designation to `train_VAE_optimized.py` = cosine decay + early stopping (matching the manuscript). Files renamed accordingly; see section 2 above and `02_vae/README.md`.
+- **Disease-group definitions.** Confirmed fine as-is — no code changes needed for the DCM `"I42"` match or the five externally-sourced disease groups. See section 4 above.
+- **U-Net deployment threshold.** Confirmed: 0.9 is correct. See section 1 above.
+
 ### Still open
 
-1. **Cis-pQTL window: 100kb (the manuscript text you pasted) vs. 500kb (`06_mr/cis_loop_script.R:120`) vs. a "revised Methods... 500kb" claim already sitting in `docs/REVIEW_REQUIRED.md` item 1.** This is the one item that isn't resolvable by a text edit alone, because there are already two contradictory claims about the *correct* value inside this repo's own docs — determine which is actually true before writing the manuscript text, since it determines which SNPs are valid instruments for every downstream MR/coloc/MR-PRESSO result. This is now the single highest-priority open item in this document.
+None at highest priority currently. See `docs/REVIEW_REQUIRED.md` for the remaining lower-stakes items (MR-PRESSO manifest ambiguity, `vae_evaluation.py` dual copies, unset path placeholders, a couple of "confirm the printed/saved output" notebook checks).

@@ -1,37 +1,42 @@
 path	size_bytes	sha256	provenance
-.gitignore	476	13997d717189e13ffd0bb87077dd28c1949cbe899271986c70fc233ad17f4722	generated during repo assembly
+.gitignore	569	24e7db8a9b367a6d81820dba43af44464cf90ce88e0ca6755acab23626469fc6	generated during repo assembly
 01_imaging/01_shriya_unet_myocardium.ipynb	46437	c6ae237edcaa970d39617b585618380ea6702c4befc5acc0b7e1eaa5d292f7bc	mine: All Fibrosis CODE/shriya_unet_myocardium.ipynb (renamed with execution-order prefix; trimmed)
 01_imaging/02_septal-myocardial-quality-comparison.ipynb	9803	e399c891768a8b5935355f5fd1cb9c256c6e8b0fbf5635aa75ab6521e5470d3c	mine: All Fibrosis CODE/septal-myocardial-quality-comparison.ipynb (renamed with execution-order prefix; trimmed)
-01_imaging/README.md	4857	02329a92383d46c7d1e2f9943d09a47f678c96b0cd4964d9f127ff25dc694928	generated during repo assembly
+01_imaging/README.md	4673	9feef72affa7453b3433d78108228b85d673bd976f4f4a885cd7aa68f69a8d5a	generated during repo assembly
 01_imaging/deploy_fine_tune_sam_myocardium_autobounding_box.sh	835	05a1db41630352c38678251a30d445771de1e375bab1ed4df068e0dc69fd3e62	mine: All Fibrosis CODE/deploy_fine_tune_sam_myocardium_autobounding_box.sh
 01_imaging/deploy_unet_segmentation.py	10912	1a7b41df8b23762f154d99f31d05b35767df4186c80c7248f5d486ef4fff7bac	mine: All Fibrosis CODE/deploy_unet_segmentation.py
 01_imaging/fine_tune_sam_myocardium_autobounding_box.py	15623	b5f50964e88b7a6759cdaf60fa02e739f7a16c4f67f6c821b1e18d2d3d964c40	mine: All Fibrosis CODE/fine_tune_sam_myocardium_autobounding_box.py (syntax-fixed, un-quarantined)
 01_imaging/png_dicom_transformer.py	2788	5063f1387c8f064bcb153309bfeeb855559667967e26abd7491acb7ebe290768	mine: All Fibrosis CODE/png_dicom_transformer.py
 01_imaging/shriya_unet_myocardium.py	14103	dd9961b06e1149186b4019f4e945fc3cd97a54e18d756f6958744dd8febf3ac3	mine: All Fibrosis CODE/shriya_unet_myocardium.py
 01_imaging/unet_quality_control.py	3300	e7241f14a79934b2be6926ee331e8faebd522b8e4161d20ecb48d58da460c376	mentor: submission_code_nBME-26-4003_20260717/01_imaging/unet_quality_control.py
+02_Manuscript.docx	1377709	d4dfbc2ca751fbc5b4aa061647800da76a404c0633ec9d9dec0dbd908d67bc7f	UNKNOWN -- needs provenance entry
 02_vae/01_CVAE_myocardium_masks.ipynb	37559	fc2006cb037814bad97774e9535eb86a0f483fe53813ffd54227aa0f684a4ce2	mine: All Fibrosis CODE/Copy of CVAE_myocardium_masks.ipynb (renamed with execution-order prefix; restructured to keep only Phases 2-3)
 02_vae/02_CVAE_evaluation_Rerun_alt.ipynb	43267	2d85047e0a8af5cfc056a2c4b6417c66e8bbec0536c6bf255fa1cd3de57bb368	mine: All Fibrosis CODE/CVAE_evaluation Rerun (renamed with execution-order prefix + _alt suffix; trimmed; canonicity vs 02_CVAE_evaluation_cleaned.ipynb unresolved)
 02_vae/02_CVAE_evaluation_cleaned.ipynb	44337	0aa82755d8dd64f48a487d7c3018dff1c684f83becc6dc6e689036b13c5455f7	mine: All Fibrosis CODE/CVAE_evaluation cleaned (renamed with execution-order prefix; trimmed)
 02_vae/03_VAE_Attention_Mapping.ipynb	20677	e743aa2eadc2544a38ed1025437a58db37da266a29fbcfc8b470e4231c277310	mine: All Fibrosis CODE/VAE_Attention_Mapping.ipynb (renamed with execution-order prefix; reordered to be runnable top-to-bottom; trimmed)
-02_vae/README.md	3784	ef441292264e7b5aaf5999c8301d6de04399630a7e72e0cd9dc531640876c829	generated during repo assembly
+02_vae/README.md	4262	a20f423e83dbd0a7c19fab74760d70aa16f76c9bc985bdf9454b218c2e95a8bb	generated during repo assembly
 02_vae/cvae_16d_best.weights.h5	20246240	17d4626f684e23056e66da514d76192b7404c605f23716265a01a8aad622204c	mine: All Fibrosis CODE/cvae_16d_best.weights (1).h5
 02_vae/cvae_16d_optimized.weights.h5	20246240	93284eaea2a9afa6d8e739c8842ee1bcede1f955c986c28bc0c9b3352e89688b	mine: All Fibrosis CODE/cvae_16d_optimized.weights.h5 copy 2
 02_vae/deploy_VAE_reconstruction.py	9278	62ee433a12a92a1470c0fd7e03418bc9b746b17d75d649a62061c9835e9cdd8f	mine: All Fibrosis CODE/deploy_VAE_reconstruction.py
 02_vae/deploy_VAE_reconstruction.sh	1394	83416c7e4ef85e0c7da3cd3aafbf36e466c25392703713c7bad381d29ecd50cf	mine: All Fibrosis CODE/deploy_VAE_reconstruction.sh
 02_vae/train_VAE.sh	1651	027d2faaf85461cd793db7a8c77d11a5020423356929ca472b3a94581627014b	mentor: submission_code_nBME-26-4003_20260717/02_vae/train_VAE.sh
-02_vae/train_VAE_optimized.py	9863	432576d3129d2b8eb878b6d218b525dc88057f90102e3746b69613529bd5ef90	mine: All Fibrosis CODE/train_VAE_optimized copy.py (confirmed canonical -- matches manuscript LR schedule; renamed from train_VAE_optimized_v1.py)
-02_vae/train_VAE_optimized_alt.py	14229	75b2b805ae0cc935b21f308d416e2c0c402d7aab0831a1e00910e2012daf9954	mine: All Fibrosis CODE/train_VAE_optimized.py (renamed from train_VAE_optimized.py; not the manuscript's script)
+02_vae/train_VAE_optimized.py	14229	75b2b805ae0cc935b21f308d416e2c0c402d7aab0831a1e00910e2012daf9954	mine: All Fibrosis CODE/train_VAE_optimized.py (confirmed canonical against the full manuscript text -- CosineDecay LR schedule + early stopping patience 10, matching exactly; renamed from train_VAE_optimized_alt.py during a second review pass once the actual manuscript document was available)
+02_vae/train_VAE_optimized_alt.py	9863	432576d3129d2b8eb878b6d218b525dc88057f90102e3746b69613529bd5ef90	mine: All Fibrosis CODE/train_VAE_optimized copy.py (ExponentialDecay LR schedule, no early stopping; not the manuscript's script; renamed from train_VAE_optimized.py/_v1.py during the same review pass)
 02_vae/training_loss_16d.png	19184	1a9e0c41c1efbf14ad2e56b74f982e8a923ed9eaf790469415143afb49e865b2	mine: All Fibrosis CODE/training_loss_16d copy 2.png
 02_vae/vae_evaluation.py	13610	f0588225b710702d646bab6471c545c7537ff9269353c37f61549431680e9b3f	mine: All Fibrosis CODE/vae-evaluation copy.py
-03_phenotypes/01_SMHOLLI_tranformer_phenotype_associations.ipynb	56682	ae584e6042384f95695c8223e0f36e563a5f4a7fd32fa1e07b8636ebb606b92a	mine: All Fibrosis CODE/SMHOLLI_tranformer_phenotype_associations.ipynb (renamed with execution-order prefix; fixed a variable-name typo and dead data loads; removed deprecated transformers_data section; trimmed)
-03_phenotypes/02_Clustering_CM_Classification.ipynb	18564	c2f83b659b565dc1ca24e45308fc460ec059507506a1672b7a910dd7f37a03dc	mine: All Fibrosis CODE/Clustering_CM_Classification.ipynb (renamed with execution-order prefix; fixed a cell-ordering bug; trimmed)
-03_phenotypes/README.md	2215	72ef5c1854055b816d46d11cddd76fff26cd9dd605b634910d6efafd8f1cd946	generated during repo assembly
+03_phenotypes/01_hematocrit_regression.py	7383	32bdffd729d2c994a6d05e775d933f361894e723e1d88a198add162be372e73a	mine: split out of All Fibrosis CODE/SMHOLLI_tranformer_phenotype_associations.ipynb during a second cleanup pass (mask QC + hematocrit/hypertension regression)
+03_phenotypes/02_ancestry_and_id_mapping.py	3717	972ff11a4ed66d81cd901df2b2ed9ffab78cec34e70075e86fe297503d7affee	mine: split out of All Fibrosis CODE/SMHOLLI_tranformer_phenotype_associations.ipynb during a second cleanup pass (ID remapping; produces the --keep sample list 05_gwas/ reads)
+03_phenotypes/03_disease_status_annotation.py	10031	ec01070a829f96c906f9f49572852b2dfa51652a02fa5ef82d44c06fa937b378	mine: split out of All Fibrosis CODE/SMHOLLI_tranformer_phenotype_associations.ipynb during a second cleanup pass (ICD-10 disease groups + disease_patient_IDs.txt; fixed a DCM copy-paste bug and a cell-ordering bug)
+03_phenotypes/04_covariate_prep.py	6316	755142979853ef6b9520fbf5b611dfa3b444eeacc5eef41b4781dde683d97b87	mine: split out of All Fibrosis CODE/SMHOLLI_tranformer_phenotype_associations.ipynb during a second cleanup pass (per-disease-group covariate tables)
+03_phenotypes/05_myocardium_vs_septum_validation.py	5938	5e160b9a4988fe65af5498adc84b1ceff00d696df9b017f84184612b406ed982	mine: split out of All Fibrosis CODE/SMHOLLI_tranformer_phenotype_associations.ipynb during a second cleanup pass (whole-myocardium vs. septal T1 validation)
+03_phenotypes/README.md	4380	3b222c52b7b60b6ec2e4425aded1994adee69c855e1fd8bbffc145610b390409	generated during repo assembly
 03_phenotypes/T1_percentiles_erroded.py	6297	bb66151f01eb76f5766d2cd4f9395e282a554191768fa6b912d0ed1dbed6f088	mine: All Fibrosis CODE/T1_percentiles_erroded.py
 03_phenotypes/T1_percentiles_erroded.sh	255	828099bb4bd3c541cb588852ad8e71e829d44b2024b566b7d96717efa4cd0ff6	mentor: submission_code_nBME-26-4003_20260717/03_phenotypes/T1_percentiles_erroded.sh
+03_phenotypes/cardiomyopathy_clustering_exploratory.ipynb	18564	c2f83b659b565dc1ca24e45308fc460ec059507506a1672b7a910dd7f37a03dc	mine: All Fibrosis CODE/Clustering_CM_Classification.ipynb (renamed unnumbered/exploratory -- unsupervised clustering, not part of the manuscript's reported disease groups; fixed a cell-ordering bug; trimmed)
 04_pwas/01_Protien_GWAS_prep.ipynb	25921	dd25aac7270f81d8c170af7a1e238a159d14e813710fdf054d0c7f35ef42b7ae	mine: All Fibrosis CODE/Protien_GWAS_prep.ipynb (renamed with execution-order prefix; trimmed)
 04_pwas/02_PWAS_T1_Time.ipynb	37574	3167ec0faaa76cb60abe48699bfb5b4410c89da214207f4015f0c92e808d10c1	mine: All Fibrosis CODE/PWAS_T1_Time.ipynb (renamed with execution-order prefix; trimmed)
 04_pwas/03_PheWAS_delta_rank_test_T1_descriptive_statistics.ipynb	85023	07d246b06681ddea925e17201a9f7262fe7d0855702b7321a5149c9cb3a1b574	mine: All Fibrosis CODE/PheWAS_delta_rank_test_T1_descriptive_statistics.ipynb (renamed with execution-order prefix; split -- see 04_pwas/biomarker_panel_exploratory.ipynb; two undefined-variable bugs fixed; trimmed)
-04_pwas/README.md	2799	859ff88f32cd3be2b2e433b9446dcb438f0414d292629bc7adac76f29e633d4f	generated during repo assembly
+04_pwas/README.md	3201	b838e924cc6ee7781c140c583503c66bc6b175d424d50a2d00cbc9188da0d21c	generated during repo assembly
 04_pwas/biomarker_panel_exploratory.ipynb	136446	5dc43ed20173a87751f9986380b53c60eba1301d5f8e5de7f7ebc40f752cbdbf	mine: split out of All Fibrosis CODE/PheWAS_delta_rank_test_T1_descriptive_statistics.ipynb (protein-biomarker ML analysis not part of the manuscript's reported methods; kept unnumbered/exploratory)
 05_gwas/README.md	4831	97942a92659a5998196687264b0d64841de034b0f2b17bc648c6bab6965a1a5b	generated during repo assembly
 05_gwas/annotate_vcf.sh	338	e4c143d09d19027d624770b9e4a5aea110edf3a85120fb9a9cef242fd4373486	mine: All Fibrosis CODE/annotate_vcf.sh
@@ -77,12 +82,12 @@ path	size_bytes	sha256	provenance
 07_decode_validation/transform_format_decode.sh	1533	b1fb0f462f270ae0204859aaa71baa22428918027d860aedd8081f56bfd09c34	mentor: submission_code_nBME-26-4003_20260717/07_decode_validation/transform_format_decode.sh
 08_clinical_associations/01_SHMOLLI_PHEWAS_final.ipynb	37644	55121a32c898c0c4f7f1f3b1d9bd6ce7ffa2396504a0831285c7d5577a082241	mine: All Fibrosis CODE/SHMOLLI_PHEWAS_final.ipynb (renamed with execution-order prefix; trimmed)
 08_clinical_associations/02_mortality_curves_chi_squared.ipynb	119517	f67c2c3b02cfa0d4a0e4b07ea80d7aa2756b3c6d3538c9632f44c0018da69389	mine: All Fibrosis CODE/mortality_curves_chi_squared.ipynb (renamed with execution-order prefix; removed author-labeled 'Depreciated'/'Eroding Playground' sections; trimmed)
-08_clinical_associations/README.md	3204	789a6194209ff1bcb81e765ba9f84abf78d931e2ede76c2d41aa68b6691f69cb	generated during repo assembly
+08_clinical_associations/README.md	3457	179e22287eeeed646667844dc8064cd937c3e3a4051dcee9dcb40e9ceadcd746	generated during repo assembly
 09_figures/01_Fibrosis_Figures.ipynb	106394	a460b044ade9f48d89de15f92f86fb3bee50b8aeb81c008c4a2fbd0af3ca47ac	mine: All Fibrosis CODE/Fibrosis_Figures copy.ipynb (renamed with execution-order prefix; 3 bugs fixed; trimmed)
 09_figures/README.md	2974	9573d64ad1d89b1a608a89d1ab97c393f707bce50bc33509963987c34a79d8b2	generated during repo assembly
-README.md	10610	7b912c7e7820ec6a557fe95f206cc65559adbe75e09f4272af2dfe9acf419ab2	generated during repo assembly
+README.md	11111	cf8afecff2f62279e83564cdf95266e59107c0c05cde56523549efe24d150f26	generated during repo assembly
 docs/CHECKS.md	2670	11e2009f939545423d81c94b68393d652a4715880de42e26eaeb489dd08b165d	generated during repo assembly
-docs/MANUSCRIPT_VERIFICATION.md	29015	e1c1603f746c311af24b4581a5bd87933af30c14ef03a66fc1aeb3a7bdb3cc63	generated during repo assembly
-docs/REVIEW_REQUIRED.md	6114	8c8251fa2b44c120b2171d5db809bc729472b3dab89220fb22c7f4f48ad23509	generated during repo assembly
+docs/MANUSCRIPT_VERIFICATION.md	31372	a41c956452ec92270b924b7226afa819eb6ca4f9e325fefd7b94e68aab6a1cda	generated during repo assembly
+docs/REVIEW_REQUIRED.md	5809	2ec9393223c81ca2d4bc28b73f6da991741484e73ed51b409c73e24cefa5e168	generated during repo assembly
 packages.R	2211	0bf986df5f81a849393a7dacd390d9bf1582315a35ee289fa541a4790b66c8e2	generated during repo assembly
 requirements.txt	1325	1d3c440d2e5055badc522b0a24bdcb749cd9278873800ca71849cfafc3220a3a	generated during repo assembly

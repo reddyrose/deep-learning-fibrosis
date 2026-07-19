@@ -1,10 +1,10 @@
 # 07_decode_validation
 
-Format conversion for external MR replication in the deCODE Genetics proteomics cohort (Eldjarn et al., *Nature* 2023). Converts deCODE's summary-statistic format into the same UKBB/plink2-style format used everywhere else in this pipeline, so the deCODE data can be run through the **existing** `06_mr/` MR scripts rather than needing separate deCODE-specific analysis code. The MR run itself, and the comparison of deCODE vs. UK Biobank MR results, were performed manually using `06_mr/`'s scripts -- see `docs/REVIEW_REQUIRED.md`.
+Format conversion for external MR replication in the deCODE Genetics proteomics cohort (Eldjarn et al., *Nature* 2023). Converts deCODE's summary-statistic format into the same UKBB/plink2-style format used elsewhere in this pipeline, so the deCODE data can be run through `06_mr/`'s existing MR scripts. The MR run itself, and the comparison of deCODE vs. UK Biobank MR results, are performed with `06_mr/`'s scripts against the converted inputs.
 
 ## Files
 
-Two independent implementations of the same conversion task -- kept as alternates; which one was used for the reported replication isn't resolvable from source alone.
+Two independent implementations of the same conversion task, kept as alternates.
 
 ### `transform_decode_to_ukbb_gwas.py`
 Chunked pandas-based converter, suited to large files.

@@ -9,7 +9,7 @@ Truncates outliers (3-SD winsorization), residualizes T1 phenotypes against cova
 - **Input:** `cleaned_T1_percentiles_HHregressed.csv_phenotypes_trimmed.txt` + `..._covariates_trimmed.txt` under `./data/shriya/SHMOLLI-output-unet-myocardium-update2/`.
 - **Output:** `cleaned_T1_percentiles_HHregressed.no_outliers.residuals.qnorm.txt`.
 - **Run:** `Rscript outliers_residuals_norm.ProblemPhenotypes.R` (edit `BASE_DIR` first).
-- **Note:** a header comment in the script explicitly warns the covariate formula shown is only the last-saved version -- other phenotype files (e.g. the PWAS covariate set) may have used a different covariate list (BMI, height/weight ratio) not reflected in the current on-disk state of this script. Documented as a note rather than a bug, per the repo owner: this script was manually edited "for various purposes throughout the project."
+- **Note:** the covariate list in this script is edited to match the phenotype file being produced at the time; other phenotype files (e.g. the PWAS covariate set) use a different covariate list (BMI, height/weight ratio).
 
 ### 2. `gwas_final_imputed.sh` / `gwas_VAE.sh`
 Run the actual PLINK2 GWAS (`--glm`) of T1-percentile and CVAE-latent-dimension phenotypes respectively against imputed UK Biobank genotypes. Same QC filters in both: `--maf 0.01 --mac 20 --geno 0.1 --hwe 1e-15 --mind 0.1`.
@@ -28,7 +28,7 @@ The main, batched hg19->hg38 liftover pipeline: loops over every `*.glm.linear` 
 - **Run:** activate a CrossMap conda environment (see inline comment), then `sbatch full_hg38_converter_pipline.sh`.
 
 ### 5. `snp-standardization-workflow.sh` (current) / `snp-standardization-workflow_v1.sh` (earlier version, kept for reference)
-Standardizes SNP IDs (a mix of `CHR:POS:REF:ALT` and rsIDs) to consistent rsIDs via Ensembl VEP, run in a Singularity container. `_v1.sh` is an earlier version missing the `--dir_cache`/`--species`/`--assembly`/`--fork 8` flags and the VEP-failure guard that the current version has -- which of the two was used for any given published run is not resolvable from source alone.
+Standardizes SNP IDs (a mix of `CHR:POS:REF:ALT` and rsIDs) to consistent rsIDs via Ensembl VEP, run in a Singularity container. `_v1.sh` is an earlier version missing the `--dir_cache`/`--species`/`--assembly`/`--fork 8` flags and the VEP-failure guard that the current version has.
 - **Input:** every `.txt`/`.tsv`/`.gz` file in `INPUT_DIR` (a header row + SNP ID in column 3 expected).
 - **Output:** `<name>_standardized.txt` per input file.
 - **Run:** `sbatch snp-standardization-workflow.sh` (requires `singularity` and a local VEP cache).
