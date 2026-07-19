@@ -1,0 +1,16 @@
+# 08_clinical_associations
+
+Cross-phenotype correlation testing (PheWAS-style), and Kaplan-Meier/Cox survival analysis with chi-squared disease-prevalence testing. Both notebooks read the U-Net/CVAE phenotype outputs from `01_imaging/`/`02_vae/` merged with UK Biobank clinical/metabolomic data -- they don't depend on each other and can be run in either order, though they're numbered by rough logical grouping.
+
+## Files
+
+### 1. `01_SHMOLLI_PHEWAS_final.ipynb`
+Computes Pearson correlations between T1/CVAE-latent phenotypes and three other domains -- metabolomics, hematocrit-adjusted cardiac phenotypes, and (for the latent dimensions specifically) a partial pass with true Spearman correlation over metabolomic measures only. Ends by saving the significant (Bonferroni-corrected) correlation and p-value tables to CSV under `./data/shriya/SHMOLLI-output-unet-myocardium-update2/`. Two other candidate correlation domains (abdominal phenotypes, physical activity) were never actually loaded in the original notebook and all code referencing them was removed as dead during cleanup, along with an unused patient-ID re-mapping experiment.
+
+### 2. `02_mortality_curves_chi_squared.ipynb`
+Three analyses:
+- **Kaplan-Meier + Cox proportional hazards survival analysis** -- for every T1/CVAE-latent phenotype, tests 5 high/low stratification schemes (median split, 25th/75th/2.5th/97.5th percentile cutoffs) against all-cause mortality, computing log-rank p-values, hazard ratios, and 95% CIs, saved to `survival_analysis_results.csv` (read downstream by `09_figures/`). Also includes cause-specific (CV mortality, STEMI, stroke) Kaplan-Meier curves, and a strain-phenotype (circumferential/longitudinal/radial, AHA-segment) mortality-curve analysis.
+- **Nested Cox model comparison** -- tests whether CVAE latent dimensions add predictive value for mortality beyond mean T1 alone. **Kept as four successive versions** (each fixing a methodological issue in the previous one -- penalization choice, feature grouping, sample-matching for valid likelihood-ratio tests) rather than collapsed into one, since it wasn't possible to confirm from source alone which version's numbers are the ones reported in the manuscript. A markdown note directly above these cells in the notebook explains what changed release to release. See `docs/REVIEW_REQUIRED.md` for a caveat about one version's misleading "saved" message.
+- **Chi-squared disease-prevalence testing** -- for each phenotype, splits patients into quartiles and tests disease prevalence (13 disease groups, ICD10-code-derived) across quartiles via chi-squared contingency tables, saving significant associations to `chi2_disease_prevalence.csv`. This is the manuscript's reported chi-squared disease-prevalence method.
+
+Two sections the *original notebook author* had already labeled `# Depreciated` and `# Eroding Playground` (myocardium-erosion-sensitivity scratch work, consistent with the erosion analysis not being part of the manuscript -- see `03_phenotypes/README.md`) were removed entirely during cleanup, along with three superseded single-cutoff-scheme Kaplan-Meier loops that were strict subsets of the 5-cutoff-type analysis described above.

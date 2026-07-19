@@ -1,0 +1,26 @@
+# Data files -- this repo is code-only; UK Biobank / proteomics data must
+# never be committed. CSVs are excluded wholesale since git has no
+# size-based ignore mechanism; force-add (`git add -f`) any small reference
+# CSV that genuinely belongs in version control.
+*.csv
+
+# PLINK genotype files
+*.bed
+*.bim
+*.fam
+
+# Model weights / large binary artifacts
+*.h5
+*.hdf5
+*.weights.h5
+
+# Python
+__pycache__/
+*.pyc
+
+# OS / editor cruft
+.DS_Store
+
+# Logs and temp files
+*.log
+*.tmp
