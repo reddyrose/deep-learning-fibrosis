@@ -1,0 +1,52 @@
+# Python dependencies for the deep-learning cardiac MRI phenotyping and
+# proteome-wide MR analysis pipeline.
+#
+# Versions pinned below come from the manuscript Methods section. Every other
+# package is used in the analysis scripts/notebooks without a version pin in
+# the original code -- confirm the exact version used before submission.
+
+# --- Pinned in the manuscript Methods ---
+numpy==1.22.4
+pandas==2.3.2
+scipy==1.7.1
+lifelines==0.30.0
+
+# --- Core scientific / data handling (version unspecified -- confirm before submission) ---
+scikit-learn
+scikit-image
+statsmodels
+seaborn
+matplotlib
+matplotlib-venn
+
+# --- Imaging / segmentation (version unspecified -- confirm before submission) ---
+opencv-python
+Pillow
+tifffile
+pydicom
+imageio
+tqdm
+IPython
+
+# --- Deep learning (version unspecified -- confirm before submission) ---
+tensorflow
+tensorflow-probability
+tensorflow-docs @ git+https://github.com/tensorflow/docs
+keras
+torch
+transformers
+datasets
+monai
+
+# --- Survival / clinical association analysis (version unspecified -- confirm before submission) ---
+kaplanmeier
+
+# --- Clinical validation / ML (version unspecified -- confirm before submission) ---
+xgboost
+shap
+imbalanced-learn
+
+# --- Dimensionality reduction / visualization (version unspecified -- confirm before submission) ---
+umap-learn
+plotly
+ipywidgets
