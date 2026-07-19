@@ -17,4 +17,4 @@ The same colocalization logic, for **CVAE-latent-dimension** outcomes.
 - **Output:** `coloc_results_latent_task<NN>_of<NN>.tsv.gz`.
 - **Run:** `sbatch COLOC_latent.sh`.
 
-Both use the `coloc` R package and report `PP.H4` (shared causal variant) and `PP.H3` (distinct causal variants), matching the manuscript's colocalization methodology. Outputs from both are read together by `09_figures/01_Fibrosis_Figures.ipynb`'s "COLOC Analysis" section.
+Both use the `coloc` R package and report `PP.H4` (shared causal variant) and `PP.H3` (distinct causal variants). Outputs from both are read together by `09_figures/01_Fibrosis_Figures.ipynb`'s "COLOC Analysis" section.
