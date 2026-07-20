@@ -1,12 +1,15 @@
 # Validation checks
 
-- Python: 12/12 included `.py` files parse successfully with `python3 -m py_compile`. `01_imaging/fine_tune_sam_myocardium_autobounding_box.py` previously failed on an unclosed `print(` parenthesis (line ~397); the missing `)` has been added and the file un-quarantined -- see `REVIEW_REQUIRED.md` item 8. No further quarantined files remain.
-- Shell: all 23 included `.sh` files pass `bash -n`, including `06_mr/mr_presso/run_MR_PRESSO.sh` after correcting its SLURM array bound to match its pairs manifest (`REVIEW_REQUIRED.md` item 5) and `02_vae/train_VAE.sh` after pointing it at an existing training script (`REVIEW_REQUIRED.md` item 13).
-- R: all 14 included `.R` files parse successfully with `Rscript`/R 4.4 (local check via `Rscript -e "parse(...)"`), including the newly merged cis-pQTL extraction, clumping, MR orchestration, and second colocalization (`COLOC_latent.R`) workflows.
-- Notebooks: all 14 `.ipynb` files are valid JSON. Cell outputs, `execution_count`, and Colab-specific metadata (`colab`, `executionInfo`, `outputId`, notebook-level `colab`/`widgets` blocks, which can contain personal Google Drive file IDs) were cleared from the staged copies before this checksum pass. Source cells were not modified.
-- Credential-pattern scan: no matches for common password, token, API-key, or private-key patterns in the current tree. (A live-looking Hugging Face token found during initial assembly in the SAM fine-tuning scripts was removed and replaced with an `$HF_TOKEN` environment-variable reference -- see `REVIEW_REQUIRED.md` item 9. The token should be rotated/revoked since it previously sat in a folder that was about to be pushed to GitHub.)
-- Hardcoded-path scan: no remaining `/oak/`, `/content/drive/`, `/Users/`, `/home/`, or `/scratch/` references outside of explanatory comments across `.py`, `.sh`, `.R`, and `.ipynb` files.
-- Provenance: every file in `docs/MANIFEST.tsv` is tagged with its origin -- either the original flat "All Fibrosis CODE" source folder, or the mentor's `submission_code_nBME-26-4003_20260717` snapshot merged in on top of it. No entries are missing provenance.
-- Package size at this validation pass: see `docs/MANIFEST.tsv` for the full file listing and sizes; the two CVAE `.weights.h5` files (~19-20 MB each) are excluded from git via `.gitignore` but retained on disk and in the manifest for completeness.
+Last run 2026-07-20.
 
-These checks establish parseability, path-portability, and basic sharing hygiene. No analyses were executed and scientific reproducibility (i.e. that these scripts, run in order, reproduce the manuscript's numeric results) has not been established -- see `REVIEW_REQUIRED.md`.
+- **Python:** all 17 `.py` files parse successfully with `python3 -m py_compile`.
+- **Shell:** all 23 `.sh` files present.
+- **R:** all 14 `.R` files parse successfully (`Rscript -e "parse(...)"`, R 4.4).
+- **Notebooks:** all 14 `.ipynb` files are valid JSON. Cell outputs, `execution_count`, and Colab-specific metadata (`colab`, `executionInfo`, `outputId`) are cleared from every notebook; source cells are otherwise unmodified.
+- **Credential-pattern scan:** no matches for common password, token, API-key, or private-key patterns anywhere in the tracked tree.
+- **Hardcoded-path scan:** no remaining `/oak/`, `/content/drive/`, `/Users/`, `/home/`, or `/scratch/` references outside explanatory comments across `.py`, `.sh`, `.R`, and `.ipynb` files.
+- **Large/data files:** no `.csv`, `.bed`, `.bim`, `.fam`, `.h5`, or `.hdf5` files are tracked by git; the two CVAE `.weights.h5` files are kept locally for reference and excluded via `.gitignore`.
+- **Provenance:** every tracked file is listed in `docs/MANIFEST.tsv` with size, SHA-256 checksum, and origin.
+- **Cross-references:** every file path named in a `README.md` (as a markdown link or in backticks) resolves to a real file in the repository, or is documented as a runtime-generated output.
+
+These checks establish parseability, path portability, and file hygiene. They do not execute the pipeline; running the numbered folders in order against real UK Biobank data has not been re-verified end to end from this checked-out state.

@@ -5,11 +5,7 @@ residuals and the European-ancestry sample-inclusion list.
 
 The European-ancestry output of this script, euro_minus_exclusion_minus_firstdegree_imputed.txt,
 is the --keep sample list read directly by 05_gwas/gwas_final_imputed.sh and
-05_gwas/gwas_VAE.sh -- despite being labelled "Legacy Code" in the original
-notebook, it is live, load-bearing production code, not dead exploration.
-
-Split out of the original 03_phenotypes/01_SMHOLLI_tranformer_phenotype_associations.ipynb
-during repository cleanup -- see docs/REVIEW_REQUIRED.md.
+05_gwas/gwas_VAE.sh.
 """
 
 import os

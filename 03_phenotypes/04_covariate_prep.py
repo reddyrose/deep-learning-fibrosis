@@ -3,9 +3,6 @@ Prepares per-phenotype-group covariate tables (VAE latent dimensions, plus
 one per disease group from 03_disease_status_annotation.py) for downstream
 regression, and remaps a couple of residual-phenotype files to
 application-24983 IDs.
-
-Split out of the original 03_phenotypes/01_SMHOLLI_tranformer_phenotype_associations.ipynb
-during repository cleanup -- see docs/REVIEW_REQUIRED.md.
 """
 
 import os

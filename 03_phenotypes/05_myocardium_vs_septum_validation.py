@@ -4,9 +4,6 @@ approach) against septal-only T1 (the approach used by prior literature, e.g.
 Nauffal et al. 2023) -- Bland-Altman agreement, correlation, and a t-test,
 plus a broader Spearman/Pearson screen of septal T1 against every raw T1
 percentile and VAE latent-dimension column.
-
-Split out of the original 03_phenotypes/01_SMHOLLI_tranformer_phenotype_associations.ipynb
-during repository cleanup -- see docs/REVIEW_REQUIRED.md.
 """
 
 import os

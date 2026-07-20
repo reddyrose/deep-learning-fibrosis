@@ -2,9 +2,6 @@
 Quality-controls the U-Net myocardium/septum T1 percentile outputs (donut-shape
 contour check on every subject's mask), then regresses hematocrit (and
 hematocrit+hypertension) out of the T1 distribution metrics.
-
-Split out of the original 03_phenotypes/01_SMHOLLI_tranformer_phenotype_associations.ipynb
-during repository cleanup -- see docs/REVIEW_REQUIRED.md.
 """
 
 import os
