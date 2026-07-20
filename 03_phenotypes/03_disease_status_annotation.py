@@ -6,16 +6,6 @@ writes disease_patient_IDs.txt -- the file 04_pwas/03_PheWAS_delta_rank_test_T1_
 and 08_clinical_associations/02_mortality_curves_chi_squared.ipynb read (as
 cardiac_ids_dict) for the HCM, Valvular, Amyloidosis, Ischemic, and
 Non-Ischemic disease groups.
-
-Two bugs were fixed relative to the original notebook cell during this split:
-- DCM_status was being set from HCM_patients_ids (a copy-paste error) instead
-  of DCM_patients_ids.
-- The myocardium/septum merge referenced the HCM_status column before it was
-  created; the merge now runs after disease-status annotation instead of
-  before it.
-
-Split out of the original 03_phenotypes/01_SMHOLLI_tranformer_phenotype_associations.ipynb
-during repository cleanup -- see docs/REVIEW_REQUIRED.md.
 """
 
 import os
@@ -35,8 +25,8 @@ unet_myocardium_data = unet_myocardium_data.sort_values(by="id").reset_index(dro
 unet_myocardium_data = unet_myocardium_data[unet_myocardium_data["Mean_T1"] != 0]
 
 # unet_septum_data's `quality_controlled` column is pre-computed by
-# 01_imaging/unet_quality_control.py and reused here as the QC flag for the
-# whole-myocardium data below (cell 32's cross-check in the original notebook).
+# 01_imaging/unet_quality_control.py and is reused here as the QC flag for
+# the whole-myocardium data as well.
 unet_septum_data = pd.read_csv(
     os.path.join(BASE_DIR, "shriya/SHMOLLI-output-unet-septum/mean_T1.csv")
 )

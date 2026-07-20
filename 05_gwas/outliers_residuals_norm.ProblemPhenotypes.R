@@ -10,7 +10,6 @@ rm(list=ls())
 # height-weight ratio for PWAS phenotypes) are not present in this version.
 # If reproducing a specific published result, confirm which covariate set
 # that result actually used rather than assuming this script's current state.
-# See docs/MANUSCRIPT_VERIFICATION.md section 3 for the detailed comparison.
 
 # BASE_DIR should point to the root data directory on your system
 # (originally /oak/stanford/groups/euan/projects on the Stanford Sherlock cluster).

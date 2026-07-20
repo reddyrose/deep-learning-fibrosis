@@ -104,13 +104,10 @@ def calculate_statistics(image):
 # call and the "_8itr_erroded" paths below). The pipeline also references
 # 2/4/6/10-iteration sibling outputs (e.g. T1_percentiles_PheWAS_2itr_erroded,
 # ...4itr..., ...6itr..., ...10itr... consumed by 04_pwas/Protien_GWAS_prep.ipynb,
-# and a 10itr variant consumed downstream in 06_mr/) which were most likely
-# produced by re-running this same script with itr and the output paths below
-# edited by hand each time, rather than by a separate script per iteration
-# count. No other iteration-count version of this file was found in the
-# source trees this repository was assembled from -- if you need to regenerate
-# the other iteration depths, change itr=8 in erode_image() and the
-# "8itr_erroded"/"8itr" strings below accordingly.
+# and a 10itr variant consumed downstream in 06_mr/), produced by re-running
+# this script with itr and the output paths below edited by hand for each
+# depth. To regenerate a different iteration depth, change itr=8 in
+# erode_image() and the "8itr_erroded"/"8itr" strings below accordingly.
 def main():
     # BASE_DIR should point to the root data directory on your system
     # (originally /oak/stanford/groups/euan/projects on the Stanford Sherlock cluster).
