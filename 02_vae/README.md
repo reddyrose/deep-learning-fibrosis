@@ -2,6 +2,8 @@
 
 Convolutional variational autoencoder (CVAE) training, evaluation, deployment, and attention mapping. Takes the U-Net myocardium masks from `01_imaging/` and learns a compact latent representation of each subject's T1 spatial pattern.
 
+Run in a separate GPU conda environment from the rest of the repository (shared with `01_imaging/`'s U-Net/SAM steps) -- see [`requirements-gpu.txt`](../requirements-gpu.txt) (Python 3.10.15, TensorFlow 2.18.0).
+
 ## Files, in the order you'd use them
 
 ### 1. `01_CVAE_myocardium_masks.ipynb`

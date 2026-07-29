@@ -2,6 +2,8 @@
 
 DICOM preprocessing, U-Net myocardium segmentation (training and deployment), mask quality control, and an alternate SAM-based segmentation approach.
 
+The U-Net training/deployment and SAM fine-tuning steps need a GPU and ran in a separate conda environment from the rest of the repository (shared with `02_vae/`) -- see [`requirements-gpu.txt`](../requirements-gpu.txt) (Python 3.10.15, TensorFlow 2.18.0). `png_dicom_transformer.py` and `unet_quality_control.py` are plain CPU steps and use the primary environment (repo-root [`requirements.txt`](../requirements.txt)).
+
 ## Files, in the order you'd use them
 
 ### 1. `png_dicom_transformer.py`

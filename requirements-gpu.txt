@@ -1,0 +1,32 @@
+# Python dependencies for the GPU training/deployment steps specifically:
+# 01_imaging/ (U-Net training and deployment, SAM fine-tuning) and 02_vae/
+# (CVAE training, evaluation, deployment). These ran in a separate conda
+# environment (`VAE`, Python 3.10.15) from the rest of the repository -- see
+# the repo-root requirements.txt for everything else.
+
+python==3.10.15
+numpy==2.2.4
+scipy==1.15.2
+tensorflow==2.18.0
+tensorflow-probability==0.24.0
+keras==3.7.0
+tf-keras==2.18.0
+scikit-learn==1.6.1
+scikit-image==0.25.0
+matplotlib==3.10.1
+opencv-python-headless==4.11.0.86
+tifffile==2024.9.20
+imageio==2.36.1
+IPython==8.30.0
+h5py==3.12.1
+tqdm==4.67.1
+
+# Not found in the recorded `VAE` environment listing -- confirm before submission:
+pandas
+Pillow
+pydicom
+torch
+transformers
+datasets
+monai
+tensorflow-docs @ git+https://github.com/tensorflow/docs

@@ -37,17 +37,17 @@ Not included in this repository: UK Biobank or other participant-level data; gen
 ## Dependencies
 
 ### Python
-See [`requirements.txt`](requirements.txt). Pinned: Python 3.9.7, NumPy 1.22.4, pandas 2.3.2, SciPy 1.7.1, lifelines 0.30.0. Also used, without a pinned version: TensorFlow, PyTorch, scikit-learn, scikit-image, OpenCV, statsmodels, seaborn, XGBoost, SHAP, imbalanced-learn, UMAP, Plotly, Hugging Face `transformers`/`datasets`, MONAI.
+Two conda environments were used. See [`requirements.txt`](requirements.txt) (Python 3.9.7) for the primary environment, covering everything except the GPU training/deployment steps in `01_imaging/` (U-Net, SAM fine-tuning) and `02_vae/` (CVAE), which used a separate GPU environment pinned in [`requirements-gpu.txt`](requirements-gpu.txt) (Python 3.10.15, TensorFlow 2.18.0). Packages not present in either recorded environment (PyTorch, Hugging Face `transformers`/`datasets`, MONAI, UMAP, Plotly, `ipywidgets`) are listed unpinned -- confirm their versions before submission.
 
 ### R
 See [`packages.R`](packages.R). Pinned: TwoSampleMR 0.6.14, MendelianRandomization 0.10.0, coloc 5.2.3, MRPRESSO 1.0. Also used, without a pinned version: data.table, dplyr, readr, optparse, future.apply, future, purrr, stringr, renv, ggplot2, matrixStats, preprocessCore, RhpcBLASctl. `renv` is only required if `RENV_DIR` is set to activate a project-local renv environment.
 
 ### Command-line tools
-- **PLINK / PLINK2**: GWAS (`05_gwas/gwas_final_imputed.sh`, `05_gwas/gwas_VAE.sh`) and LD clumping (`06_mr/clumping_shriya.sh`, PLINK 1.90b5.3).
+- **PLINK / PLINK2**: GWAS (`05_gwas/gwas_final_imputed.sh`, `05_gwas/gwas_VAE.sh`, PLINK2 2.00a2.3) and LD clumping (`06_mr/clumping_shriya.sh`, PLINK 1.90b5.3).
 - **LDSC** (`munge_sumstats.py`, `ldsc.py`): heritability and genetic correlation (`05_gwas/ldsc_h2_SR.py`).
 - **bcftools**: version 1.16.
 - **htslib** (`bgzip`, `tabix`): version 1.16, parameterized via `HTSLIB_BIN`.
-- **CrossMap**: hg19 to hg38 liftover (`05_gwas/full_hg38_converter_pipline.sh`).
+- **CrossMap** (0.7.3): hg19 to hg38 liftover (`05_gwas/full_hg38_converter_pipline.sh`), run from its own conda environment (Python 3.9.21).
 - **Ensembl VEP**: SNP ID standardization (`05_gwas/snp-standardization-workflow.sh`), run via a Singularity container.
 - **R**: version 4.4.
 
