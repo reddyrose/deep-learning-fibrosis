@@ -33,6 +33,8 @@ def parse_args():
             help="number of epochs to train on")
     ap.add_argument("-ld", "--latent_dim", required=True, type=int,
             help="latent dimensions of the VAE")
+    ap.add_argument("-s", "--seed", type=int, default=42,
+            help="random seed for the train/val/test shuffle")
     return vars(ap.parse_args())
 
 def get_bounding_box(ground_truth_map):
@@ -87,15 +89,18 @@ def load_and_preprocess_image(file_path):
 
     return processed
     
-def create_streaming_datasets(image_files, valid_ids, image_folder, 
-                            train_val_test_split=[0.7, 0.15, 0.15],
+def create_streaming_datasets(image_files, valid_ids, image_folder,
+                            train_val_test_split=[0.7, 0.1, 0.2],
                             batch_size=32,
-                            shuffle_buffer=1000):
+                            shuffle_buffer=1000,
+                            seed=None):
     # Filter valid files and get full paths
-    valid_files = [os.path.join(image_folder, f) for f in image_files 
+    valid_files = [os.path.join(image_folder, f) for f in image_files
                   if f[:7] in valid_ids]
-    
+
     # Shuffle files once before splitting
+    if seed is not None:
+        np.random.seed(seed)
     np.random.shuffle(valid_files)
     
     # Split into train/val/test
@@ -221,14 +226,15 @@ def train_vae():
     batch_size = args["batch_size"]
     epochs = args["epochs"]
     latent_dim = args["latent_dim"]
-    
+    seed = args["seed"]
+
     # Load quality control data
     image_files = sorted([f for f in os.listdir(image_folder) if f.endswith('.tiff')])
-    
+
     #load OG MRI mean T1 file
     mean_T1_original = pd.read_csv(quality_control_path)
     valid_ids = mean_T1_original.loc[mean_T1_original['quality_controlled'], 'id'].astype(str).tolist()
-    
+
     valid_image_files = [file for file in image_files if file[:7] in valid_ids]
 
     # Create datasets
@@ -236,7 +242,8 @@ def train_vae():
         image_files=valid_image_files,
         valid_ids=valid_ids,
         image_folder=image_folder,
-        batch_size=batch_size
+        batch_size=batch_size,
+        seed=seed
     )
     
     # Initialize model and optimizer
