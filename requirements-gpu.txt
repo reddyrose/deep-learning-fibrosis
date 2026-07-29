@@ -4,7 +4,8 @@
 # environment (`VAE`, Python 3.10.15) from the rest of the repository -- see
 # the repo-root requirements.txt for everything else.
 
-python==3.10.15
+# Requires Python 3.10.15 (install separately, e.g. via conda create -n <name> python=3.10.15)
+
 numpy==2.2.4
 scipy==1.15.2
 tensorflow==2.18.0

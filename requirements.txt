@@ -8,7 +8,7 @@
 # training/evaluation/deployment), which used a separate GPU environment --
 # see requirements-gpu.txt.
 
-python==3.9.7
+# Requires Python 3.9.7 (install separately, e.g. via conda create -n <name> python=3.9.7)
 
 # --- Core scientific / data handling ---
 numpy==1.22.4

@@ -34,22 +34,41 @@ Within each folder, files are numbered by execution order, so directory listing 
 
 Not included in this repository: UK Biobank or other participant-level data; genotype files, proteomic measurements, and summary-statistic result sets; model weights beyond the two CVAE `.weights.h5` files kept for reference (git-ignored); scheduler logs; software environments or licensed reference panels.
 
-## Dependencies
+## System requirements
 
-### Python
-Two conda environments were used. See [`requirements.txt`](requirements.txt) (Python 3.9.7) for the primary environment, covering everything except the GPU training/deployment steps in `01_imaging/` (U-Net, SAM fine-tuning) and `02_vae/` (CVAE), which used a separate GPU environment pinned in [`requirements-gpu.txt`](requirements-gpu.txt) (Python 3.10.15, TensorFlow 2.18.0). Packages not present in either recorded environment (PyTorch, Hugging Face `transformers`/`datasets`, MONAI, UMAP, Plotly, `ipywidgets`) are listed unpinned -- confirm their versions before submission.
+### Operating system
+Developed and run on Linux (Stanford Sherlock HPC cluster; specific distribution version not recorded). Not tested on macOS or Windows; the code has no OS-specific calls beyond standard file I/O, but this hasn't been verified.
 
-### R
-See [`packages.R`](packages.R). Pinned: TwoSampleMR 0.6.14, MendelianRandomization 0.10.0, coloc 5.2.3, MRPRESSO 1.0. Also used, without a pinned version: data.table, dplyr, readr, optparse, future.apply, future, purrr, stringr, renv, ggplot2, matrixStats, preprocessCore, RhpcBLASctl. `renv` is only required if `RENV_DIR` is set to activate a project-local renv environment.
+### Software dependencies and versions tested on
+Three conda environments were used, and the version numbers below are exactly what was tested -- not general compatibility claims.
 
-### Command-line tools
+- **Primary environment** (`keras_gpu`, Python 3.9.7): everything except the GPU training/deployment steps below. See [`requirements.txt`](requirements.txt) for the full pinned list. Also used: R 4.4, see [`packages.R`](packages.R) (pinned: TwoSampleMR 0.6.14, MendelianRandomization 0.10.0, coloc 5.2.3, MRPRESSO 1.0; unpinned: data.table, dplyr, readr, optparse, future.apply, future, purrr, stringr, renv, ggplot2, matrixStats, preprocessCore, RhpcBLASctl -- `renv` only required if `RENV_DIR` is set).
+- **GPU environment** (`VAE`, Python 3.10.15, CUDA 12.4, cuDNN 9.1.1): the U-Net and SAM steps in `01_imaging/` and the CVAE steps in `02_vae/`. See [`requirements-gpu.txt`](requirements-gpu.txt).
+- **`crossmap` environment** (Python 3.9.21): hg19-to-hg38 liftover only (`05_gwas/full_hg38_converter_pipline.sh`), via the CrossMap CLI tool (0.7.3).
+
+Packages used in the code without a version recorded in any of the three environments (PyTorch, Hugging Face `transformers`/`datasets`, MONAI, UMAP, Plotly, `ipywidgets`) are listed unpinned in the requirements files -- confirm before submission.
+
+Other command-line tools:
 - **PLINK / PLINK2**: GWAS (`05_gwas/gwas_final_imputed.sh`, `05_gwas/gwas_VAE.sh`, PLINK2 2.00a2.3) and LD clumping (`06_mr/clumping_shriya.sh`, PLINK 1.90b5.3).
 - **LDSC** (`munge_sumstats.py`, `ldsc.py`): heritability and genetic correlation (`05_gwas/ldsc_h2_SR.py`).
 - **bcftools**: version 1.16.
 - **htslib** (`bgzip`, `tabix`): version 1.16, parameterized via `HTSLIB_BIN`.
-- **CrossMap** (0.7.3): hg19 to hg38 liftover (`05_gwas/full_hg38_converter_pipline.sh`), run from its own conda environment (Python 3.9.21).
 - **Ensembl VEP**: SNP ID standardization (`05_gwas/snp-standardization-workflow.sh`), run via a Singularity container.
-- **R**: version 4.4.
+
+### Non-standard hardware
+An NVIDIA GPU (CUDA 12.4-compatible) is required for `01_imaging/`'s U-Net training/deployment and SAM fine-tuning, and for `02_vae/`'s CVAE training/evaluation/deployment. As run on Sherlock (per each script's SLURM header): CVAE training requested 1 GPU and 100GB RAM (`02_vae/train_VAE.sh`, ~20hr wall time); SAM fine-tuning requested 1 GPU and 100GB RAM (`01_imaging/deploy_fine_tune_sam_myocardium_autobounding_box.sh`, ~48hr); CVAE deployment requested 1 GPU and 6GB RAM (~9hr). No specific GPU model is recorded. The non-GPU pipeline stages (GWAS, Mendelian randomisation, colocalization) requested up to 64GB RAM and multi-day wall time on CPU-only nodes -- see each folder's `.sh` scripts for exact `#SBATCH` resource requests.
+
+## Installation guide
+
+### Instructions
+1. Clone this repository.
+2. Create the primary conda environment and install Python dependencies: `conda create -n fibrosis python=3.9.7 && conda activate fibrosis && pip install -r requirements.txt`.
+3. If running the GPU steps (`01_imaging/` U-Net/SAM, `02_vae/` CVAE), create a second environment: `conda create -n fibrosis-gpu python=3.10.15 && conda activate fibrosis-gpu && pip install -r requirements-gpu.txt`. Requires a CUDA 12.4-compatible NVIDIA GPU and driver, installed separately.
+4. Install R 4.4 and run `Rscript packages.R` to install the R dependencies.
+5. Install the command-line tools listed above (PLINK/PLINK2, LDSC, bcftools, htslib, Ensembl VEP) separately; none are installed by the steps above.
+
+### Typical install time
+Measured directly: `pip install -r requirements.txt` took 32 seconds, and `pip install -r requirements-gpu.txt` took 53 seconds, each into a clean virtual environment on a standard broadband connection. Two caveats on these numbers: they used the latest compatible package versions rather than the exact pins above (Python 3.9.7/3.10.15 were unavailable to test directly), and the GPU install was measured on a CPU-only TensorFlow/PyTorch build -- the Linux CUDA-bundled wheels used on Sherlock pull in several additional multi-hundred-MB `nvidia-*` CUDA library packages and will take meaningfully longer, plausibly several minutes depending on connection speed. Neither number includes NVIDIA driver/CUDA toolkit installation, which is system-dependent. R package installation via `packages.R` was not benchmarked; compiling `coloc`/`MRPRESSO` from source if binaries aren't available can take 10-20 minutes.
 
 ## Data availability
 

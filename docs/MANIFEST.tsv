@@ -100,11 +100,11 @@ Manuscript Figures/Figure 4.png	356729	8ab07608f62b3d41ec0828f096af1ab2fc183ce3c
 Manuscript Figures/Figure 5.png	499111	bbda56c07157f5b567000683cd0fd120177d038a269500160557205be9cc968a	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 6.png	643703	9dae23a27caf2d1058719ab817b02cc86f041edb25ac6cb24eb81d6b6e938ddf	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 7.png	348050	93338289cf3492176cae7dcff4113fe137f895438cf7001e2fb35deaa63286e3	UNKNOWN -- needs provenance entry
-README.md	9252	d598ddca86ead35c63f33687940301eb061d09a77adf4cf1beb8acffd74749a3	generated during repo assembly
+README.md	12121	410681514ac880dcad91e871734a075ac9d8cc7d04ff8a273f768f92d5430c52	generated during repo assembly
 docs/CHECKS.md	2670	11e2009f939545423d81c94b68393d652a4715880de42e26eaeb489dd08b165d	generated during repo assembly
 docs/MANUSCRIPT_VERIFICATION.md	31372	a41c956452ec92270b924b7226afa819eb6ca4f9e325fefd7b94e68aab6a1cda	generated during repo assembly
 docs/REVIEW_REQUIRED.md	5809	2ec9393223c81ca2d4bc28b73f6da991741484e73ed51b409c73e24cefa5e168	generated during repo assembly
 packages.R	2211	0bf986df5f81a849393a7dacd390d9bf1582315a35ee289fa541a4790b66c8e2	generated during repo assembly
-requirements-gpu.txt	847	d97b36e2d9b5d353e1dbe83ec17805207d76290f00900c1b2170cdddbada5576	generated during repo assembly; versions pinned from the VAE conda environment
-requirements.txt	1208	3e605ac61bcac4788b1098e26370b66552807e27306538902def5012370b1ffe	generated during repo assembly; versions pinned from the keras_gpu conda environment
+requirements-gpu.txt	927	a1509cac58a7d39f6831a9a9fc13fb04010bf0c987188dde8066038424e0beba	generated during repo assembly; versions pinned from the VAE conda environment
+requirements.txt	1285	75f044a75d34e9d7138b183ddd2e0b4451cb595d74e3f85e7d97b9a70b248a68	generated during repo assembly; versions pinned from the keras_gpu conda environment
 study_overview.png	606871	c77c8ba629d5b8a6c259f5346bc42729df7354350d36110fc7f2ce183bc92a99	mine: Manuscript Figures/Figure 2.png (study design schematic, added to README)
