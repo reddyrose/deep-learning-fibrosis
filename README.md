@@ -72,7 +72,7 @@ Measured directly: `pip install -r requirements.txt` took 32 seconds, and `pip i
 
 ## Data availability
 
-This project uses UK Biobank data, available to approved researchers under application 22282; UK Biobank data cannot be redistributed and are not included in this repository. deCODE Genetics proteomics summary statistics used for external replication (`07_decode_validation/`) are available via Eldjarn et al., *Nature* 2023.
+This project uses UK Biobank data, available to approved researchers under application 22282; UK Biobank data cannot be redistributed and are not included in this repository. deCODE Genetics proteomics summary statistics used for external replication (`07_decode_validation/`) are available via Eldjarn et al., *Nature* 2023, at https://www.decode.com/summarydata/ (GWAS summary statistics for all 2,931 Olink assays and all 4,907 SomaScan assays).
 
 ## Configuring data paths
 
