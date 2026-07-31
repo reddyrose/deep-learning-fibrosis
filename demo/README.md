@@ -20,15 +20,15 @@ the original R packages (`TwoSampleMR`, `MendelianRandomization`, `coloc`)
 use, in Python, to keep the demo to a single environment. None of the
 notebook's numbers should be cited as scientific results.
 
-## Why there's no real demo dataset
+## Why this demo uses synthetic data, not real UK Biobank data
 
 Every stage of this pipeline operates on UK Biobank imaging, genotype, or
 proteomic data (application 22282). UK Biobank's data-sharing terms
 prohibit redistributing participant-level data or any subset/derivative of
-it outside the approved application, which rules out a real (even small)
-demo dataset. See the root [`README.md`](../README.md)'s **Data
-availability** section. This notebook uses exclusively procedurally
-generated synthetic data instead.
+it outside the approved application, which rules out shipping even a small
+real extract alongside this repository. See the root
+[`README.md`](../README.md)'s **Data availability** section. This notebook
+uses exclusively procedurally generated synthetic data instead.
 
 ## Run it
 
@@ -44,10 +44,11 @@ outputs:
 jupyter nbconvert --to notebook --execute demo_walkthrough.ipynb
 ```
 
-Measured runtime: under 90 seconds end to end on a standard laptop CPU (no
+Measured runtime: about 3 minutes end to end on a standard laptop CPU (no
 GPU required -- the synthetic data and training loops are small enough to
-run on CPU alone). The notebook's own summary cell reports the actual
-measured time for that run.
+run on CPU alone; most of the time is the CVAE training cell, run long
+enough for its latent dimensions to differentiate spatially). The
+notebook's own summary cell reports the actual measured time for that run.
 
 ## `example_data/`
 
