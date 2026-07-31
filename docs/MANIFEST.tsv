@@ -95,7 +95,7 @@ Manuscript Figures/Figure 6.png	643703	9dae23a27caf2d1058719ab817b02cc86f041edb2
 Manuscript Figures/Figure 7.png	348050	93338289cf3492176cae7dcff4113fe137f895438cf7001e2fb35deaa63286e3	UNKNOWN -- needs provenance entry
 README.md	10272	24a8010b8f1ae1a5314d3f61ca1ae05072c636732802c5881cf1b7e75b7e0d07	generated during repo assembly
 demo/README.md	3879	a91f8bf27ea6bebd3b1076eceaab133c57a8b591ed636490fc68a3c3f262c685	mine: participant-free synthetic demo, written for journal code review
-demo/demo_walkthrough.ipynb	1482178	44eda43b2ce7be5ad3800b7113ae69d93f4c5e39420f39f08c4a409b43b2211f	mine: participant-free demo notebook, executed with committed outputs
+demo/demo_walkthrough.ipynb	1355628	3e4a593c9c227d194cb32f583dbc1e08c84fc7370bc16fc58bb4c73a392e1d1e	mine: participant-free demo notebook, executed with committed outputs
 demo/example_data/README.md	2809	92c7333489fc8f273275a651bd40692072725e717e06b9171c25a67a74d4638b	mine: data dictionary for the synthetic demo inputs
 demo/example_data/SHA256SUMS.txt	858	5bfdf6c413740a413444987f0dbdf3a31f95fd5eb5ca28dea89e85256e5d64d4	mine: checksums for the synthetic demo inputs
 demo/example_data/synthetic_cohort.tsv	83351	94680036b9115c141c008b5fe5de2d48a3c1cd708f4f8b0d85ccd17194ea9816	mine: procedurally generated synthetic data (seed 42), no real data
