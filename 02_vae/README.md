@@ -38,6 +38,6 @@ Deploys the trained CVAE at scale: encodes every subject's myocardium mask to it
 Produces Grad-CAM-style attention maps showing which spatial regions of the myocardium mask drive each latent dimension's activation, using a `VAEGradCAM` class built on the trained CVAE.
 
 ## Reference artifacts (not scripts)
-- **`cvae_16d_best.weights.h5`** — the reported model's saved weights (from `train_VAE_optimized.py`), git-ignored (large binary; see repo-root `.gitignore`).
-- **`cvae_16d_optimized.weights.h5`** — weights from `train_VAE_optimized_alt.py`, git-ignored.
-- **`training_loss_16d.png`** — training-loss curve for the 16-dimensional model.
+- **`cvae_16d_best.weights.h5`** -- the reported model's saved weights (from `train_VAE_optimized.py`).
+- **`cvae_16d_optimized.weights.h5`** -- weights from `train_VAE_optimized_alt.py`, git-ignored (large binary; see repo-root `.gitignore`).
+- **`training_loss_16d.png`** -- training-loss curve for the 16-dimensional model.

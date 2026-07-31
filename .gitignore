@@ -9,10 +9,13 @@
 *.bim
 *.fam
 
-# Model weights / large binary artifacts
+# Model weights / large binary artifacts -- excluded by default; the two
+# reported trained checkpoints are force-added exceptions (see below).
 *.h5
 *.hdf5
 *.weights.h5
+!01_imaging/myocardium-unet-256.h5
+!02_vae/cvae_16d_best.weights.h5
 
 # Python
 __pycache__/

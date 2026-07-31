@@ -43,3 +43,6 @@ An alternate segmentation approach: fine-tunes Meta's Segment Anything Model (SA
   python fine_tune_sam_myocardium_autobounding_box.py -t "$HF_TOKEN" -uw <path>/myocardium-unet-256.h5 -n <hf-model-name> -i <path>/UKBB_SHMOLLI-pngimages -o <path>/SHMOLLI-output-2
   ```
 - **Output:** a fine-tuned SAM model pushed to the given Hugging Face model name, plus `mean_T1.csv`/`statistics.txt`/mask arrays at `-o`, in the same format as `deploy_unet_segmentation.py`.
+
+## Reference artifacts (not scripts)
+- **`myocardium-unet-256.h5`** -- the reported model's trained U-Net weights (from `shriya_unet_myocardium.py`/step 2 above).

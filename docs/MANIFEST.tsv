@@ -1,11 +1,12 @@
 path	size_bytes	sha256	provenance
-.gitignore	569	24e7db8a9b367a6d81820dba43af44464cf90ce88e0ca6755acab23626469fc6	generated during repo assembly
+.gitignore	740	21bed53b82a0bce12b9457222334c12f13f4b42dc1b0bec3f8638b273fdd74cf	generated during repo assembly
 01_imaging/01_shriya_unet_myocardium.ipynb	46437	c6ae237edcaa970d39617b585618380ea6702c4befc5acc0b7e1eaa5d292f7bc	mine: All Fibrosis CODE/shriya_unet_myocardium.ipynb (renamed with execution-order prefix; trimmed)
 01_imaging/02_septal-myocardial-quality-comparison.ipynb	9803	e399c891768a8b5935355f5fd1cb9c256c6e8b0fbf5635aa75ab6521e5470d3c	mine: All Fibrosis CODE/septal-myocardial-quality-comparison.ipynb (renamed with execution-order prefix; trimmed)
-01_imaging/README.md	4706	88bd542233ef19642cd23384e066d01a5bc41acc688506d3b5cc7f0c1e21c9e0	generated during repo assembly
+01_imaging/README.md	4870	073121625a9ecc94c4b38f252bd7697ce9665d792910c9206d574a3073c52e45	generated during repo assembly
 01_imaging/deploy_fine_tune_sam_myocardium_autobounding_box.sh	835	05a1db41630352c38678251a30d445771de1e375bab1ed4df068e0dc69fd3e62	mine: All Fibrosis CODE/deploy_fine_tune_sam_myocardium_autobounding_box.sh
 01_imaging/deploy_unet_segmentation.py	10912	1a7b41df8b23762f154d99f31d05b35767df4186c80c7248f5d486ef4fff7bac	mine: All Fibrosis CODE/deploy_unet_segmentation.py
 01_imaging/fine_tune_sam_myocardium_autobounding_box.py	15623	b5f50964e88b7a6759cdaf60fa02e739f7a16c4f67f6c821b1e18d2d3d964c40	mine: All Fibrosis CODE/fine_tune_sam_myocardium_autobounding_box.py (syntax-fixed, un-quarantined)
+01_imaging/myocardium-unet-256.h5	4822048	c3ec9c71f4d60072b205ff749b0f56f26a0322932f974a78597b03ac8f517b70	mine: reported trained U-Net checkpoint, published for demo/code-review use
 01_imaging/png_dicom_transformer.py	2788	5063f1387c8f064bcb153309bfeeb855559667967e26abd7491acb7ebe290768	mine: All Fibrosis CODE/png_dicom_transformer.py
 01_imaging/shriya_unet_myocardium.py	14103	dd9961b06e1149186b4019f4e945fc3cd97a54e18d756f6958744dd8febf3ac3	mine: All Fibrosis CODE/shriya_unet_myocardium.py
 01_imaging/unet_quality_control.py	3300	e7241f14a79934b2be6926ee331e8faebd522b8e4161d20ecb48d58da460c376	mentor: submission_code_nBME-26-4003_20260717/01_imaging/unet_quality_control.py
@@ -15,8 +16,8 @@ path	size_bytes	sha256	provenance
 02_vae/02_CVAE_evaluation_Rerun_alt.ipynb	43267	2d85047e0a8af5cfc056a2c4b6417c66e8bbec0536c6bf255fa1cd3de57bb368	mine: All Fibrosis CODE/CVAE_evaluation Rerun (renamed with execution-order prefix + _alt suffix; trimmed; canonicity vs 02_CVAE_evaluation_cleaned.ipynb unresolved)
 02_vae/02_CVAE_evaluation_cleaned.ipynb	44337	0aa82755d8dd64f48a487d7c3018dff1c684f83becc6dc6e689036b13c5455f7	mine: All Fibrosis CODE/CVAE_evaluation cleaned (renamed with execution-order prefix; trimmed)
 02_vae/03_VAE_Attention_Mapping.ipynb	20677	e743aa2eadc2544a38ed1025437a58db37da266a29fbcfc8b470e4231c277310	mine: All Fibrosis CODE/VAE_Attention_Mapping.ipynb (renamed with execution-order prefix; reordered to be runnable top-to-bottom; trimmed)
-02_vae/README.md	3679	ac14943ad1fb8f6216f6c075d87bdecd4d6e7f3fbfce75e97628460a5d0b5c3e	generated during repo assembly
-02_vae/cvae_16d_best.weights.h5	20246240	17d4626f684e23056e66da514d76192b7404c605f23716265a01a8aad622204c	mine: All Fibrosis CODE/cvae_16d_best.weights (1).h5
+02_vae/README.md	3663	54fc304120968dada01fd4e80481c41d44b9c2f7a506056002261b59cd9d489f	generated during repo assembly
+02_vae/cvae_16d_best.weights.h5	20246240	17d4626f684e23056e66da514d76192b7404c605f23716265a01a8aad622204c	mine: reported trained CVAE checkpoint, published for demo/code-review use
 02_vae/cvae_16d_optimized.weights.h5	20246240	93284eaea2a9afa6d8e739c8842ee1bcede1f955c986c28bc0c9b3352e89688b	mine: All Fibrosis CODE/cvae_16d_optimized.weights.h5 copy 2
 02_vae/deploy_VAE_reconstruction.py	9278	62ee433a12a92a1470c0fd7e03418bc9b746b17d75d649a62061c9835e9cdd8f	mine: All Fibrosis CODE/deploy_VAE_reconstruction.py
 02_vae/deploy_VAE_reconstruction.sh	1394	83416c7e4ef85e0c7da3cd3aafbf36e466c25392703713c7bad381d29ecd50cf	mine: All Fibrosis CODE/deploy_VAE_reconstruction.sh
@@ -91,8 +92,22 @@ Manuscript Figures/Figure 4.png	356729	8ab07608f62b3d41ec0828f096af1ab2fc183ce3c
 Manuscript Figures/Figure 5.png	499111	bbda56c07157f5b567000683cd0fd120177d038a269500160557205be9cc968a	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 6.png	643703	9dae23a27caf2d1058719ab817b02cc86f041edb25ac6cb24eb81d6b6e938ddf	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 7.png	348050	93338289cf3492176cae7dcff4113fe137f895438cf7001e2fb35deaa63286e3	UNKNOWN -- needs provenance entry
-README.md	9739	9c3a48b07c7b894aca5ebd665a0f0e50786f4cb66f1acc2e9e6986ef5d3e83d4	generated during repo assembly
-docs/CHECKS.md	1539	822178515482536a2aa576f73d49419f221e41189df4c83026b3742caba8402d	generated during repo assembly
+README.md	10272	24a8010b8f1ae1a5314d3f61ca1ae05072c636732802c5881cf1b7e75b7e0d07	generated during repo assembly
+demo/README.md	3749	e67cb3ef1fabf943236aa9e56ff28c81c85cf24cb308c8022062cc2bf59d16ba	mine: participant-free synthetic demo, written for journal code review
+demo/demo_walkthrough.ipynb	910641	beb5f2704e3e8cf5997cc6d1fe733fad66cf5de00539669d99bd204d8245d33b	mine: participant-free demo notebook, executed with committed outputs
+demo/example_data/README.md	2443	1cd032743f32a645c26f21963b6ea8bc5f86dc20f38935a689a606a8f63ec8eb	mine: data dictionary for the synthetic demo inputs
+demo/example_data/SHA256SUMS.txt	858	6260bbfb46977656655ba5e4d22bb1305b89c94ff0f4be28c61eed89fd035663	mine: checksums for the synthetic demo inputs
+demo/example_data/synthetic_cohort.tsv	83373	fa9ab3e3bf8fa49f15d9b0a914250a34fa28f1ae387b7428a6ab55928c277192	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_genotypes.tsv	20701	f5eb96e1c1d5f557d98023ba4d0e4e1e9bf0bc2ac13e66c12352ec9ca6ff7bea	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_latent_phenotypes.tsv	105391	159d55deaf7e07e057ea6c777efff04dbfcdb8d73e8a721d383b9d699ba42ea5	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_myocardium_mask.npy	65664	6773772b343fd1a3d5d9454ca14c33d3eba22707f5c656be9839189e14515715	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_myocardium_mask_training_set.npy	2621568	fd7e6d9f3d814e7f0f8696219ba59f0b7535624b510332ce1caa607f1ab44fc0	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_proteomics.tsv	80347	0a1ca94cc68b824a6e939543c3d9ff620e3e4fd99505af6d60313fe1a2563f1b	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_t1_map_ms.npy	262272	0b3ef963e1ea70a94c242a0aa2b780d24b839b3fbaaef825c794ee4f420f9b36	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_t1_map_training_set.npy	10485888	4d71f14dc0f823529ba80b4f273ad62cac06870cc4c04cd8ed2785175baa9837	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_variant_metadata.tsv	1148	58fd4d619d6237c1e6c32e9b89f09b94e39b7c6fd794e959eec54bb84cb84e09	mine: procedurally generated synthetic data (seed 42), no real data
+demo/generate_synthetic_data.py	10367	b7125c7e39c62ac63a15034dab1122cff22a5958fae271e8c0221aed80a3abd2	mine: procedural synthetic-data generator for the demo notebook, seeded
+docs/CHECKS.md	1539	c3fa75c3218684fedf1c99d576fc012f3596f22a81d00f21bbd53d3c83205a4f	generated during repo assembly
 docs/MANUSCRIPT_VERIFICATION.md	31372	a41c956452ec92270b924b7226afa819eb6ca4f9e325fefd7b94e68aab6a1cda	generated during repo assembly
 docs/REVIEW_REQUIRED.md	4973	c377ac03bf91dd5d563344147034929334939ef78b103490c3296f3a401a99f4	generated during repo assembly
 packages.R	2211	0bf986df5f81a849393a7dacd390d9bf1582315a35ee289fa541a4790b66c8e2	generated during repo assembly

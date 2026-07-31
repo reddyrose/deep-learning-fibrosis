@@ -1,0 +1,17 @@
+# Single environment for demo/demo_walkthrough.ipynb, the fully synthetic,
+# participant-free demonstration notebook. This is a standalone environment
+# for reviewers -- it is NOT the environment the original study was run in
+# (see requirements.txt / requirements-gpu.txt / packages.R for that), and
+# does not need to match those pins. Versions below were verified to install
+# and run the notebook together on Python 3.11.
+
+numpy==2.4.6
+pandas==2.3.3
+scipy==1.17.1
+statsmodels==0.14.6
+lifelines==0.30.3
+matplotlib==3.11.1
+tensorflow==2.21.0
+jupyter==1.1.1
+ipykernel==7.3.0
+notebook==7.6.1

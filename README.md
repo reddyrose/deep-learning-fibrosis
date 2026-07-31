@@ -28,13 +28,13 @@ Within each folder, files are numbered by execution order, so directory listing 
 
 STRING-db protein-protein interaction analysis, final protein prioritisation, and the deCODE MR-replication comparison were performed using `06_mr/`'s existing scripts against the deCODE-converted inputs, rather than by separate dedicated code.
 
-Not included in this repository: UK Biobank or other participant-level data; genotype files, proteomic measurements, and summary-statistic result sets; model weights beyond the two CVAE `.weights.h5` files kept for reference (git-ignored); scheduler logs; software environments or licensed reference panels.
+Not included in this repository: UK Biobank or other participant-level data; genotype files, proteomic measurements, and summary-statistic result sets; scheduler logs; software environments or licensed reference panels. The reported U-Net (`01_imaging/myocardium-unet-256.h5`) and CVAE (`02_vae/cvae_16d_best.weights.h5`) trained weights are included; the alternate CVAE checkpoint (`cvae_16d_optimized.weights.h5`) is kept locally for reference only (git-ignored).
 
 ## Demo
 
-No demo dataset is included in this repository. Every stage of this pipeline operates on UK Biobank imaging, genotype, or proteomic data (application 22282); UK Biobank's data-sharing terms prohibit redistributing participant-level data or any subset/derivative of it outside the approved application, which rules out including even a small demo-scale extract. See "Data availability" below.
+[`demo/`](demo/README.md) contains a participant-free demonstration notebook, [`demo/demo_walkthrough.ipynb`](demo/demo_walkthrough.ipynb), that runs every stage of the pipeline end to end (under 90 seconds, no GPU required) on **entirely synthetic data**. It does not reproduce the manuscript's results -- it demonstrates that the code runs correctly and shows what each stage's output represents.
 
-Researchers with their own approved UK Biobank access (or equivalent institutional access to comparable cardiac MRI/genotype/proteomic data) can verify the software against their own data using the original scripts described above; each folder's README documents the exact expected input, output, and command for every script, and "Installation guide" below covers configuring the code to point at your own data.
+Every stage of the actual research pipeline operates on UK Biobank imaging, genotype, or proteomic data (application 22282). UK Biobank's data-sharing terms prohibit redistributing participant-level data or any subset/derivative of it outside the approved application, which is why the demo above uses synthetic data rather than a small real extract; see "Data availability" below. Researchers with their own approved UK Biobank access (or equivalent institutional access to comparable cardiac MRI/genotype/proteomic data) can instead run the original scripts described above against their own data; each folder's README documents the exact expected input, output, and command for every script, and "Installation guide" below covers configuring the code to point at your own data.
 
 ## System requirements
 
