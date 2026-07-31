@@ -63,7 +63,7 @@ path	size_bytes	sha256	provenance
 06_mr/colocalization/COLOC_latent.R	7372	cca605c0c1855effdfe80ca18a28ee67114c9b08106a04f9ba312c5149bda688	mentor: submission_code_nBME-26-4003_20260717/06_mr/colocalization/COLOC_latent.R
 06_mr/colocalization/COLOC_latent.sh	502	fa40da1787f2d345e00f1ef749591bd13f199fc2e0459ce1eff7788cb6aaa1ce	mentor: submission_code_nBME-26-4003_20260717/06_mr/colocalization/COLOC_latent.sh
 06_mr/colocalization/COLOC_one.R	7355	4041163642ae6650f5893b8affe46fa40861e9658a280f0e2c27a68d2eb5e613	mine: All Fibrosis CODE/COLOC_one.R
-06_mr/colocalization/README.md	1892	7a4c7d3a034653753a4cb4ca3a3bba254521d39ea71285a827fa5374485b89b9	generated during repo assembly
+06_mr/colocalization/README.md	1786	f9a8864d43c86cf5f9a2ecb8ec2088816bbdbfeec20c87a99921176582349946	generated during repo assembly
 06_mr/create_scripts.sh	2574	5195b53d311c7b7cf2d84c78352c3ccede58e8f0d59248e495bf1047e6867dd3	mine: All Fibrosis CODE/create_scripts.sh
 06_mr/find_sig.sh	1751	2869b51c6ad7af7c5b305d89f21b3be54d89c3164b008c9b07264daec5468848	mine: All Fibrosis CODE/find_sig.sh
 06_mr/make_pair_list.R	1458	dda3e0f0b1c618ad04eaaebe118a32451ff96cd39bf54769eb9647ca165ae7b1	mentor: submission_code_nBME-26-4003_20260717/06_mr/make_pair_list.R
@@ -83,16 +83,7 @@ path	size_bytes	sha256	provenance
 07_decode_validation/transform_format_decode.sh	1533	b1fb0f462f270ae0204859aaa71baa22428918027d860aedd8081f56bfd09c34	mentor: submission_code_nBME-26-4003_20260717/07_decode_validation/transform_format_decode.sh
 08_clinical_associations/01_SHMOLLI_PHEWAS_final.ipynb	37644	55121a32c898c0c4f7f1f3b1d9bd6ce7ffa2396504a0831285c7d5577a082241	mine: All Fibrosis CODE/SHMOLLI_PHEWAS_final.ipynb (renamed with execution-order prefix; trimmed)
 08_clinical_associations/02_mortality_curves_chi_squared.ipynb	119517	f67c2c3b02cfa0d4a0e4b07ea80d7aa2756b3c6d3538c9632f44c0018da69389	mine: All Fibrosis CODE/mortality_curves_chi_squared.ipynb (renamed with execution-order prefix; removed author-labeled 'Depreciated'/'Eroding Playground' sections; trimmed)
-08_clinical_associations/README.md	2129	1fff4594642f6506bd6f6f7cd2b9aa10269cb4a703f7daddc6bd160bd8f80bf6	generated during repo assembly
-09_figures/01_Fibrosis_Figures.ipynb	106394	a460b044ade9f48d89de15f92f86fb3bee50b8aeb81c008c4a2fbd0af3ca47ac	mine: All Fibrosis CODE/Fibrosis_Figures copy.ipynb (renamed with execution-order prefix; 3 bugs fixed; trimmed)
-09_figures/README.md	2055	ded6c9a5f0db8992cdb8df63043436bb36657c1c5e4d48f71eb87385a8a2d32c	generated during repo assembly
-09_figures/manuscript_figures/Figure_1.png	1418887	a965656644a45d4258bb551cae714e199b12013186576b63bb08cd0b9530799a	mine: Manuscript Figures/Figure 1.png (final manuscript figure)
-09_figures/manuscript_figures/Figure_2.png	606871	c77c8ba629d5b8a6c259f5346bc42729df7354350d36110fc7f2ce183bc92a99	mine: Manuscript Figures/Figure 2.png (final manuscript figure)
-09_figures/manuscript_figures/Figure_3.png	847761	de708e923306933f41986441c2becdfeea1250cf1bf2518c7ce48aff84efa12c	mine: Manuscript Figures/Figure 3.png (final manuscript figure)
-09_figures/manuscript_figures/Figure_4.png	356729	8ab07608f62b3d41ec0828f096af1ab2fc183ce3cc93f8640cdafdbc4802007e	mine: Manuscript Figures/Figure 4.png (final manuscript figure)
-09_figures/manuscript_figures/Figure_5.png	499111	bbda56c07157f5b567000683cd0fd120177d038a269500160557205be9cc968a	mine: Manuscript Figures/Figure 5.png (final manuscript figure)
-09_figures/manuscript_figures/Figure_6.png	643703	9dae23a27caf2d1058719ab817b02cc86f041edb25ac6cb24eb81d6b6e938ddf	mine: Manuscript Figures/Figure 6.png (final manuscript figure)
-09_figures/manuscript_figures/Figure_7.png	348050	93338289cf3492176cae7dcff4113fe137f895438cf7001e2fb35deaa63286e3	mine: Manuscript Figures/Figure 7.png (final manuscript figure)
+08_clinical_associations/README.md	2094	4dbb0dc27d8fca89c0322a94058d3a8e0dcb92e5fe3ece21a4ebcddbb9df8ceb	generated during repo assembly
 Manuscript Figures/Figure 1.png	1418887	a965656644a45d4258bb551cae714e199b12013186576b63bb08cd0b9530799a	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 2.png	606871	c77c8ba629d5b8a6c259f5346bc42729df7354350d36110fc7f2ce183bc92a99	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 3.png	847761	de708e923306933f41986441c2becdfeea1250cf1bf2518c7ce48aff84efa12c	UNKNOWN -- needs provenance entry
@@ -100,10 +91,10 @@ Manuscript Figures/Figure 4.png	356729	8ab07608f62b3d41ec0828f096af1ab2fc183ce3c
 Manuscript Figures/Figure 5.png	499111	bbda56c07157f5b567000683cd0fd120177d038a269500160557205be9cc968a	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 6.png	643703	9dae23a27caf2d1058719ab817b02cc86f041edb25ac6cb24eb81d6b6e938ddf	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 7.png	348050	93338289cf3492176cae7dcff4113fe137f895438cf7001e2fb35deaa63286e3	UNKNOWN -- needs provenance entry
-README.md	12244	e6e62ac69451c7e20441b9e0977d83e2f16480e15cf730d260ba6cde87e04075	generated during repo assembly
-docs/CHECKS.md	2670	11e2009f939545423d81c94b68393d652a4715880de42e26eaeb489dd08b165d	generated during repo assembly
+README.md	9739	9c3a48b07c7b894aca5ebd665a0f0e50786f4cb66f1acc2e9e6986ef5d3e83d4	generated during repo assembly
+docs/CHECKS.md	1539	822178515482536a2aa576f73d49419f221e41189df4c83026b3742caba8402d	generated during repo assembly
 docs/MANUSCRIPT_VERIFICATION.md	31372	a41c956452ec92270b924b7226afa819eb6ca4f9e325fefd7b94e68aab6a1cda	generated during repo assembly
-docs/REVIEW_REQUIRED.md	5809	2ec9393223c81ca2d4bc28b73f6da991741484e73ed51b409c73e24cefa5e168	generated during repo assembly
+docs/REVIEW_REQUIRED.md	4973	c377ac03bf91dd5d563344147034929334939ef78b103490c3296f3a401a99f4	generated during repo assembly
 packages.R	2211	0bf986df5f81a849393a7dacd390d9bf1582315a35ee289fa541a4790b66c8e2	generated during repo assembly
 requirements-gpu.txt	927	a1509cac58a7d39f6831a9a9fc13fb04010bf0c987188dde8066038424e0beba	generated during repo assembly; versions pinned from the VAE conda environment
 requirements.txt	1285	75f044a75d34e9d7138b183ddd2e0b4451cb595d74e3f85e7d97b9a70b248a68	generated during repo assembly; versions pinned from the keras_gpu conda environment
