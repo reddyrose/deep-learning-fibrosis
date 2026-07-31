@@ -3,10 +3,12 @@
 A single Jupyter notebook, [`demo_walkthrough.ipynb`](demo_walkthrough.ipynb),
 that walks through every stage of the pipeline (`01_imaging` through
 `08_clinical_associations`) on fully synthetic data, using code that mirrors
-the structure of the original scripts as closely as possible. Markdown cells
-narrate each step; code cells and their output (plots, tables, printed
-statistics) are committed inline, so the whole analysis can be read on
-GitHub without running anything.
+the structure of the original scripts as closely as possible, including a
+Grad-CAM visualization of the VAE's latent dimensions, a GWAS Manhattan
+plot, and a PWAS phenotype x protein heatmap. Markdown cells narrate each
+step; code cells and their output (plots, tables, printed statistics) are
+committed inline, so the whole analysis can be read on GitHub without
+running anything.
 
 **This demonstrates that the code runs correctly end to end and explains
 what each stage's output represents. It is not a reproduction of the

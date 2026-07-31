@@ -28,7 +28,8 @@ OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "example_data")
 T1_BASELINE_MS = 960.0
 
 
-def make_t1_map(rng, disease_shift=0.0, radius_jitter=0.0, angle_jitter=0.0, noise_sd=5.0):
+def make_t1_map(rng, disease_shift=0.0, radius_jitter=0.0, angle_jitter=0.0, noise_sd=5.0,
+                 hotspot_angle=None, hotspot_width=0.5, hotspot_magnitude=0.0):
     """One synthetic full-field T1 map + annular myocardium mask, in milliseconds.
 
     The map includes non-zero background texture outside the myocardium (other
@@ -36,6 +37,13 @@ def make_t1_map(rng, disease_shift=0.0, radius_jitter=0.0, angle_jitter=0.0, noi
     requires the mask rather than a trivial intensity threshold -- matching how
     the real pipeline isolates myocardium by multiplying the raw T1 map by its
     U-Net segmentation mask, rather than the map being pre-masked.
+
+    `hotspot_angle` places a localized focal elevation (mimicking regional
+    fibrosis) at a given angular position around the ring, so that different
+    training subjects have genuinely different regional patterns rather than
+    only a global intensity/gradient shift -- needed for the demo notebook's
+    Grad-CAM section to show latent dimensions attending to different regions
+    instead of all converging on the same whole-ring pattern.
     """
     coords = np.arange(IMAGE_SIZE, dtype=np.float32)
     yy, xx = np.meshgrid(coords, coords, indexing="ij")
@@ -57,6 +65,12 @@ def make_t1_map(rng, disease_shift=0.0, radius_jitter=0.0, angle_jitter=0.0, noi
         + np.float32(22.0) * np.sin(radius / np.float32(8.0))
         + rng.normal(0, noise_sd, size=(IMAGE_SIZE, IMAGE_SIZE)).astype(np.float32)
     )
+
+    if hotspot_angle is not None and hotspot_magnitude != 0.0:
+        angular_diff = np.arctan2(np.sin(angle - hotspot_angle), np.cos(angle - hotspot_angle))
+        spatial_t1 = spatial_t1 + np.float32(hotspot_magnitude) * np.exp(
+            -(angular_diff ** 2) / np.float32(2 * hotspot_width ** 2)
+        )
 
     # Background: blood pool / other tissue / air, on a distinctly different
     # intensity scale from myocardium, with its own smooth spatial texture.
@@ -104,7 +118,9 @@ def main():
     rng = np.random.default_rng(SEED)
 
     # --- Imaging: one canonical example + a small training set -------------
-    canonical_t1, canonical_mask = make_t1_map(rng)
+    canonical_t1, canonical_mask = make_t1_map(
+        rng, hotspot_angle=np.pi / 3, hotspot_width=0.6, hotspot_magnitude=70.0
+    )
     np.save(os.path.join(OUTPUT_DIR, "synthetic_t1_map_ms.npy"), canonical_t1)
     np.save(os.path.join(OUTPUT_DIR, "synthetic_myocardium_mask.npy"), canonical_mask)
 
@@ -114,8 +130,18 @@ def main():
         disease_shift = rng.normal(0, 20.0)
         radius_jitter = rng.normal(0, 3.0)
         angle_jitter = rng.uniform(-0.2, 0.2)
+        # Roughly a third of subjects get a localized focal hot spot at a
+        # random angular position, giving the training set genuine regional
+        # (not just global) variation between subjects.
+        if rng.random() < 0.4:
+            hotspot_angle = rng.uniform(-np.pi, np.pi)
+            hotspot_width = rng.uniform(0.4, 0.8)
+            hotspot_magnitude = rng.uniform(40.0, 90.0)
+        else:
+            hotspot_angle, hotspot_width, hotspot_magnitude = None, 0.5, 0.0
         t1_map, mask = make_t1_map(
-            rng, disease_shift=disease_shift, radius_jitter=radius_jitter, angle_jitter=angle_jitter
+            rng, disease_shift=disease_shift, radius_jitter=radius_jitter, angle_jitter=angle_jitter,
+            hotspot_angle=hotspot_angle, hotspot_width=hotspot_width, hotspot_magnitude=hotspot_magnitude,
         )
         train_maps[i] = t1_map
         train_masks[i] = mask

@@ -85,6 +85,7 @@ path	size_bytes	sha256	provenance
 08_clinical_associations/01_SHMOLLI_PHEWAS_final.ipynb	37644	55121a32c898c0c4f7f1f3b1d9bd6ce7ffa2396504a0831285c7d5577a082241	mine: All Fibrosis CODE/SHMOLLI_PHEWAS_final.ipynb (renamed with execution-order prefix; trimmed)
 08_clinical_associations/02_mortality_curves_chi_squared.ipynb	119517	f67c2c3b02cfa0d4a0e4b07ea80d7aa2756b3c6d3538c9632f44c0018da69389	mine: All Fibrosis CODE/mortality_curves_chi_squared.ipynb (renamed with execution-order prefix; removed author-labeled 'Depreciated'/'Eroding Playground' sections; trimmed)
 08_clinical_associations/README.md	2094	4dbb0dc27d8fca89c0322a94058d3a8e0dcb92e5fe3ece21a4ebcddbb9df8ceb	generated during repo assembly
+LICENSE	1514	771ab95edb5b2580065f5f4245c287ac73a60ae84bed3c054925d78cdf7ea85c	mine: BSD-3-Clause, copyright Euan Ashley and Bruna Gomes, 2026
 Manuscript Figures/Figure 1.png	1418887	a965656644a45d4258bb551cae714e199b12013186576b63bb08cd0b9530799a	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 2.png	606871	c77c8ba629d5b8a6c259f5346bc42729df7354350d36110fc7f2ce183bc92a99	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 3.png	847761	de708e923306933f41986441c2becdfeea1250cf1bf2518c7ce48aff84efa12c	UNKNOWN -- needs provenance entry
@@ -93,24 +94,25 @@ Manuscript Figures/Figure 5.png	499111	bbda56c07157f5b567000683cd0fd120177d038a2
 Manuscript Figures/Figure 6.png	643703	9dae23a27caf2d1058719ab817b02cc86f041edb25ac6cb24eb81d6b6e938ddf	UNKNOWN -- needs provenance entry
 Manuscript Figures/Figure 7.png	348050	93338289cf3492176cae7dcff4113fe137f895438cf7001e2fb35deaa63286e3	UNKNOWN -- needs provenance entry
 README.md	10272	24a8010b8f1ae1a5314d3f61ca1ae05072c636732802c5881cf1b7e75b7e0d07	generated during repo assembly
-demo/README.md	3749	e67cb3ef1fabf943236aa9e56ff28c81c85cf24cb308c8022062cc2bf59d16ba	mine: participant-free synthetic demo, written for journal code review
-demo/demo_walkthrough.ipynb	910641	beb5f2704e3e8cf5997cc6d1fe733fad66cf5de00539669d99bd204d8245d33b	mine: participant-free demo notebook, executed with committed outputs
-demo/example_data/README.md	2443	1cd032743f32a645c26f21963b6ea8bc5f86dc20f38935a689a606a8f63ec8eb	mine: data dictionary for the synthetic demo inputs
-demo/example_data/SHA256SUMS.txt	858	6260bbfb46977656655ba5e4d22bb1305b89c94ff0f4be28c61eed89fd035663	mine: checksums for the synthetic demo inputs
-demo/example_data/synthetic_cohort.tsv	83373	fa9ab3e3bf8fa49f15d9b0a914250a34fa28f1ae387b7428a6ab55928c277192	mine: procedurally generated synthetic data (seed 42), no real data
-demo/example_data/synthetic_genotypes.tsv	20701	f5eb96e1c1d5f557d98023ba4d0e4e1e9bf0bc2ac13e66c12352ec9ca6ff7bea	mine: procedurally generated synthetic data (seed 42), no real data
-demo/example_data/synthetic_latent_phenotypes.tsv	105391	159d55deaf7e07e057ea6c777efff04dbfcdb8d73e8a721d383b9d699ba42ea5	mine: procedurally generated synthetic data (seed 42), no real data
+demo/README.md	3879	a91f8bf27ea6bebd3b1076eceaab133c57a8b591ed636490fc68a3c3f262c685	mine: participant-free synthetic demo, written for journal code review
+demo/demo_walkthrough.ipynb	1482178	44eda43b2ce7be5ad3800b7113ae69d93f4c5e39420f39f08c4a409b43b2211f	mine: participant-free demo notebook, executed with committed outputs
+demo/example_data/README.md	2809	92c7333489fc8f273275a651bd40692072725e717e06b9171c25a67a74d4638b	mine: data dictionary for the synthetic demo inputs
+demo/example_data/SHA256SUMS.txt	858	5bfdf6c413740a413444987f0dbdf3a31f95fd5eb5ca28dea89e85256e5d64d4	mine: checksums for the synthetic demo inputs
+demo/example_data/synthetic_cohort.tsv	83351	94680036b9115c141c008b5fe5de2d48a3c1cd708f4f8b0d85ccd17194ea9816	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_genotypes.tsv	20701	683858feb2429f07f2b5e1c3835ac7bba6221933a46033b0e112b0d5aa135d1d	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_latent_phenotypes.tsv	105409	f4dfada7af4850a6dc4eb65504947f3104d71d9280d2f0f0a2c9b6ca034ff63e	mine: procedurally generated synthetic data (seed 42), no real data
 demo/example_data/synthetic_myocardium_mask.npy	65664	6773772b343fd1a3d5d9454ca14c33d3eba22707f5c656be9839189e14515715	mine: procedurally generated synthetic data (seed 42), no real data
-demo/example_data/synthetic_myocardium_mask_training_set.npy	2621568	fd7e6d9f3d814e7f0f8696219ba59f0b7535624b510332ce1caa607f1ab44fc0	mine: procedurally generated synthetic data (seed 42), no real data
-demo/example_data/synthetic_proteomics.tsv	80347	0a1ca94cc68b824a6e939543c3d9ff620e3e4fd99505af6d60313fe1a2563f1b	mine: procedurally generated synthetic data (seed 42), no real data
-demo/example_data/synthetic_t1_map_ms.npy	262272	0b3ef963e1ea70a94c242a0aa2b780d24b839b3fbaaef825c794ee4f420f9b36	mine: procedurally generated synthetic data (seed 42), no real data
-demo/example_data/synthetic_t1_map_training_set.npy	10485888	4d71f14dc0f823529ba80b4f273ad62cac06870cc4c04cd8ed2785175baa9837	mine: procedurally generated synthetic data (seed 42), no real data
-demo/example_data/synthetic_variant_metadata.tsv	1148	58fd4d619d6237c1e6c32e9b89f09b94e39b7c6fd794e959eec54bb84cb84e09	mine: procedurally generated synthetic data (seed 42), no real data
-demo/generate_synthetic_data.py	10367	b7125c7e39c62ac63a15034dab1122cff22a5958fae271e8c0221aed80a3abd2	mine: procedural synthetic-data generator for the demo notebook, seeded
+demo/example_data/synthetic_myocardium_mask_training_set.npy	2621568	f760200921f3525f43e0b6453a8f8d1c80a21618e88e9d41f5a6d092df422fbd	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_proteomics.tsv	80320	3dc2f2f1927a68d2a447c37f51895e5580682c91675c00049f150440f661cc1d	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_t1_map_ms.npy	262272	db3ec8a3ab05e3cac041fa54a25f52dd14dc87c4f138366ae20b5c4b16c046a8	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_t1_map_training_set.npy	10485888	9cbdb6d53a0c591db7d787ec2f23b95454efebbf4d2d51062a887d3e2dd7c5d4	mine: procedurally generated synthetic data (seed 42), no real data
+demo/example_data/synthetic_variant_metadata.tsv	1155	5e621a73ae5b3153ecfe035364ba6acca0987ab9342d64e93d73f50ded0c5ca4	mine: procedurally generated synthetic data (seed 42), no real data
+demo/generate_synthetic_data.py	11886	747733f47663952944f028385ffaf3b3eb1d2dc5456967ee1b3f9457c1c32e6f	mine: procedural synthetic-data generator for the demo notebook, seeded
 docs/CHECKS.md	1539	c3fa75c3218684fedf1c99d576fc012f3596f22a81d00f21bbd53d3c83205a4f	generated during repo assembly
 docs/MANUSCRIPT_VERIFICATION.md	31372	a41c956452ec92270b924b7226afa819eb6ca4f9e325fefd7b94e68aab6a1cda	generated during repo assembly
 docs/REVIEW_REQUIRED.md	4973	c377ac03bf91dd5d563344147034929334939ef78b103490c3296f3a401a99f4	generated during repo assembly
 packages.R	2211	0bf986df5f81a849393a7dacd390d9bf1582315a35ee289fa541a4790b66c8e2	generated during repo assembly
+requirements-demo.txt	625	3166e1a8d1551f7897250cf2a11675a54e2b4587cb2d9b8a02737b850ff33e8e	mine: single environment for the demo notebook, versions verified to install and run together
 requirements-gpu.txt	927	a1509cac58a7d39f6831a9a9fc13fb04010bf0c987188dde8066038424e0beba	generated during repo assembly; versions pinned from the VAE conda environment
 requirements.txt	1285	75f044a75d34e9d7138b183ddd2e0b4451cb595d74e3f85e7d97b9a70b248a68	generated during repo assembly; versions pinned from the keras_gpu conda environment
 study_overview.png	606871	c77c8ba629d5b8a6c259f5346bc42729df7354350d36110fc7f2ce183bc92a99	mine: Manuscript Figures/Figure 2.png (study design schematic, added to README)

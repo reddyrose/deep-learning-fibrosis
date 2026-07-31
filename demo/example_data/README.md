@@ -16,7 +16,7 @@ acquisition protocol (MAGNETOM Aera, 1.5T, ShMOLLI; see Piechnik et al. 2010,
 |---|---|
 | `synthetic_t1_map_ms.npy` | 256 x 256 float32 analytic cardiac T1 map in milliseconds, one canonical example. |
 | `synthetic_myocardium_mask.npy` | 256 x 256 Boolean analytic annular myocardium mask, matching the canonical example. |
-| `synthetic_t1_map_training_set.npy` | 40 x 256 x 256 float32, a small individually-varied set used to demonstrate the U-Net/CVAE training loops. |
+| `synthetic_t1_map_training_set.npy` | 40 x 256 x 256 float32, a small individually-varied set used to demonstrate the U-Net/CVAE training loops. ~40% of subjects (and the canonical example) additionally have a localized focal elevation at a random angular position, giving the CVAE genuine regional variation to encode into distinct latent dimensions -- needed for the demo notebook's Grad-CAM section to show dimensions attending to different regions rather than all converging on the same whole-ring pattern. |
 | `synthetic_myocardium_mask_training_set.npy` | 40 x 256 x 256 Boolean, masks matching the training set. |
 | `synthetic_cohort.tsv` | 320 synthetic records with covariates, T1 phenotypes, follow-up and outcome fields. |
 | `synthetic_latent_phenotypes.tsv` | Sixteen synthetic latent variables for the same records. |
